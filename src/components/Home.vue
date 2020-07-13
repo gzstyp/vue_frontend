@@ -4,7 +4,8 @@
             <div class="top-left">
                 <img src="../assets/logo.jpg" alt="logo">
                 <label>管理系统服务平台</label>
-                <el-button class="toggle-button" @click="showHide()">{{aside ? '隐藏' : '显示'}}</el-button>
+                <!--<el-button class="toggle-button" @click="showHide()">{{aside ? '隐藏' : '显示'}}</el-button>-->
+                <i @click="showHide()" style="font-size: 24px;cursor: pointer;" title="隐藏|显示导航" :class="aside ? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i>
             </div>
             <div class="top-right">
                 <el-button @click="logout()">退出</el-button>
