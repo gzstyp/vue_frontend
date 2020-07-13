@@ -36,7 +36,7 @@
                         </el-menu-item>
                     </el-submenu>
                 </el-menu>
-                <div title="显示|收缩" class="toggle-menu" @click="showCollapse">|||</div>
+                <div title="显示|收缩" class="toggle-menu" @click="showCollapse"><i :class="isCollapse ? 'el-icon-right' : 'el-icon-back'"></i></div>
 			</el-aside>
             <el-container>
                 <el-main>
