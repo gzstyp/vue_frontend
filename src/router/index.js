@@ -30,7 +30,7 @@ const routes = [
 
 const router = new VueRouter({
     routes,
-    mode : 'history'
+    mode : 'history'/*注释掉这个在nginx下访问正常*/
 });
 
 //通过导航守卫控制权限
