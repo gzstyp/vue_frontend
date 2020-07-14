@@ -1,3 +1,4 @@
+/*页面入口js文件-->类似于java的main方法*/
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
