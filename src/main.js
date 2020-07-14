@@ -7,6 +7,6 @@ import './assets/css/global.css';
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
+  router,//把router路由添加挂载到容器里
   render: h => h(App)
 }).$mount('#app');
