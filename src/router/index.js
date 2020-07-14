@@ -6,6 +6,7 @@ import Role from './../views/Role';
 import User from './../views/User';
 import Menu from './../views/Menu';
 import Welcome from './../views/Welcome';
+import NotFound from './../views/NotFound';
 
 Vue.use(VueRouter);
 
@@ -20,7 +21,8 @@ const routes = [
         {path:'/role1',component:Role},
         {path:'/user1',component:User},
         {path:'/menu1',component:Menu}
-    ]}
+    ]},
+    {path:'*',component: NotFound}
 ]
 
 /*const router = new Router({
@@ -30,6 +32,10 @@ const routes = [
 
 const router = new VueRouter({
     routes,
+    scrollBehavior (to, from, savedPosition){
+        // return 期望滚动到哪个的位置
+        return { x:0,y:0} //让页面滚动到顶部
+    },
     mode : 'history'/*注释掉这个在nginx下访问正常*/
 });
 
