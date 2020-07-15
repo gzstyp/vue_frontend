@@ -68,5 +68,11 @@ export default router;
         {path:'/login',component:Login}
      ]
   });
-  3.把路由挂载到Vue的跟实例中
+  6.把路由挂载到Vue的跟实例中
+
+  路由组件的传递参数:
+  1).基本的路由参数
+  2).props的值为布尔类型
+  3).props的值为对象类型
+  4).props的值为函数类型
 */

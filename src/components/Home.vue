@@ -115,7 +115,7 @@ export default {
     methods : {
         logout : function () {
             window.sessionStorage.clear();
-            this.$router.push('/login');/*页面跳转*/
+            this.$router.push('/login');/*采用的是编程式导航,页面跳转*/
         },
         showHide : function () {
             this.aside = !this.aside;
