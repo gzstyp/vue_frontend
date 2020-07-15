@@ -1,5 +1,5 @@
 <template>
-    <div class="login_container">
+    <div class="login_container" v-cloak>
         <div class="login_box">
             <div class="avatar_box">
                 <img src="../assets/logo.jpg" alt="logo"/>
@@ -51,6 +51,9 @@ export default {
 </script>
 
 <style scoped>
+    [v-cloak]{
+        display:none;
+    }
     .login_container{
         height: 100%;
         width: 100%;
