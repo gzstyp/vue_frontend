@@ -51,3 +51,22 @@ router.beforeEach((to,from,next)=>{
 });
 
 export default router;
+
+/*
+路由的基本步骤：
+  1.引入相关的库文件
+  2.添加路由链接
+  <router-link to="" >,其中router-link会转换为a元素，to转换为hhref
+  3.添加路由占位符 <router-view />
+  4.创建路由组件供路由切换
+  const Login = {
+     template:'<h2>Login组件</h2>'
+  };
+  5.创建路由实例对象
+  const router = new VueRouter({
+     router:[
+        {path:'/login',component:Login}
+     ]
+  });
+  3.把路由挂载到Vue的跟实例中
+*/
