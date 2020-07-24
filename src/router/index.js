@@ -56,7 +56,7 @@ export default router;
 路由的基本步骤：
   1.引入相关的库文件
   2.添加路由链接
-  <router-link to="" >,其中router-link会转换为a元素，to转换为hhref
+  <router-link to="" >,其中router-link会转换为a元素，to转换为 href
   3.添加路由占位符 <router-view />
   4.创建路由组件供路由切换
   const Login = {
