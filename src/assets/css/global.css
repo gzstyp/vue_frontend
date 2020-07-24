@@ -9,3 +9,13 @@ html,body,#app{
 .el-card__body{
     padding: 2px;
 }
+div.el-submenu__title{
+    padding:0 !important;
+    height:42px;
+    line-height:42px;
+}
+li.el-submenu .el-menu-item{
+    padding:0 2px 0 6px !important;
+    height:42px;
+    line-height:42px;
+}
