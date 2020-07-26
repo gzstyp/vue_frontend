@@ -14,7 +14,7 @@
             </el-form>
             <el-row type="flex" justify="center" class="btns">
                 <el-button type="primary" @click="login()">登录认证</el-button>
-                <el-button type="info" plain>重置数据</el-button>
+                <el-button type="info" @click="resetData()" plain>重置数据</el-button>
             </el-row>
         </div>
     </div>
@@ -24,7 +24,7 @@
 export default {
     data(){
 		return{
-			loginForm :{
+			loginForm : {
 				userName : 'admin',
 				password : '1'
 			},
@@ -41,6 +41,10 @@ export default {
             this.$message.success('登录成功');
             window.sessionStorage.setItem('token','102420485120');
             this.$router.push('/home');/*采用的是编程式导航,进行页面跳转*/
+        },
+        resetData(){
+            this.loginForm.userName = '';
+            this.loginForm.password = '';
         }
     },
     created(){
