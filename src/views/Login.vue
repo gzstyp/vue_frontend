@@ -63,7 +63,7 @@ export default {
         width: 450px;
         height: 300px;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 8px;
         position:absolute;
         left: 50%;
         top: 50%;
