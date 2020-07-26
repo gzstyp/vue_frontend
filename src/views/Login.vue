@@ -25,8 +25,8 @@ export default {
     data(){
 		return{
 			loginForm : {
-				userName : 'admin',
-				password : '1'
+				userName : '',
+				password : ''
 			},
 			rules: {
 				username : [
@@ -61,12 +61,13 @@ export default {
     .login_container{
         height: 100%;
         width: 100%;
-        background: #eeeeee;
+        background-image:url("../assets/images/bg_login.jpg");
+        background-size:100% 100%;
     }
     .login_box{
         width: 450px;
         height: 300px;
-        background-color: #fff;
+        background-color:rgba(241, 235, 235, 0.5);
         border-radius: 8px;
         position:absolute;
         left: 50%;
