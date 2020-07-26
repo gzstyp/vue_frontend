@@ -12,7 +12,7 @@
             </div>
         </el-header>
         <el-container>
-            <el-aside :width="isCollapse ? '64px': '220px'" v-if="aside">
+            <el-aside :width="isCollapse ? '45px': '220px'" v-if="aside">
                 <el-menu
                   unique-opened
                   router
@@ -195,8 +195,8 @@ export default {
         border-right: 1px solid #ddd;
 	}
     .toggle-menu{
-        height: 50px;
-        line-height: 50px;
+        height: 41px;
+        line-height: 41px;
         min-width:100%;
         text-align: center;
         cursor: pointer;
@@ -228,5 +228,8 @@ export default {
         text-align: center;
         line-height: 60px;
         height: 60px;
+    }
+    .el-menu--collapse{
+        width:44px !important;
     }
 </style>
