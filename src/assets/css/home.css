@@ -1,0 +1,55 @@
+.home .num{
+    display:flex;/*弹性布局*/
+    flex-wrap:wrap;/*换行*/
+    justify-content:space-between;/*左右水平对齐,左右对齐，中间的水平对齐*/
+}
+.home .num .el-card{
+    width:32%;
+    margin-bottom:10px;
+    display:flex!important;
+}
+.home .num .icon{
+    font-size:26px;
+    width:80px;
+    height:80px;
+    line-height:80px;
+    text-align:center;
+}
+.home .graph{
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+}
+.home .graph .el-card{
+    width:49.4%;
+}
+.home .user{
+    display:flex;
+    align-items:center;/*垂直对齐方式*/
+    padding-bottom:20px;
+    margin-bottom:20px;
+    border-bottom:1px solid #ccc;
+}
+.home .user img{
+    height:160px;
+    width:160px;
+    border-radius:50%;
+    margin-right:16px;
+}
+.home .userInfo .name{
+    font-size:28px;
+}
+.home .userInfo .access{
+    color:#999;
+}
+.home .login-info p{
+    height:20px;
+    line-height:20px;
+    font-size:14px;
+    color:#999;
+}
+.home .login-info p span{
+    margin-left:10px;
+    color:#666;
+}
+
