@@ -42,7 +42,7 @@
                                             </template>
                                             <template v-for="subIt in subItem.children">
 
-                                                <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus('/'+subIt.url,subIt.name)">
+                                                <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus('/'+subIt.url,subIt.name)" v-if="subIt.hidden">
                                                     <template slot="title">
                                                         <span>{{subIt.name}}</span>
                                                     </template>
@@ -55,7 +55,7 @@
                                     </template>
                                     <template v-if="!subItem.children">
 
-                                        <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus('/'+subItem.url,subItem.name)">
+                                        <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus('/'+subItem.url,subItem.name)" v-if="subItem.hidden">
                                             <template slot="title">
                                                 <span>{{subItem.name}}</span>
                                             </template>
@@ -68,7 +68,7 @@
                         </template>
 
                         <template v-if="!item.children">
-                            <el-menu-item :index="'/'+item.url" @click="saveNavStatus('/'+item.url,item.name)">
+                            <el-menu-item :index="'/'+item.url" @click="saveNavStatus('/'+item.url,item.name)" v-if="item.hidden">
                                 <template slot="title">
                                     <span>{{item.name}}</span>
                                 </template>
@@ -108,21 +108,25 @@ export default {
                     id : '0000000000640033000000000ea4c107',
                     name : '系统管理',
                     icon : 'el-icon-setting',
+                    hidden : true,
                     url : null,
                     children : [
                         {
                             id : '0000000004dfa8b9000000002f4e715c',
                             name : '角色管理',
+                            hidden : true,
                             url : 'role'
                         },
                         {
                             id : '0000000007c4dd77ffffffffe68454c6',
                             name : '用户管理',
+                            hidden : true,
                             url : 'user'
                         },
                         {
                             id : '00000000456de029ffffffffc68a479c',
                             name : '系统菜单',
+                            hidden : true,
                             url : 'menu'
                         }
                     ]
@@ -130,33 +134,39 @@ export default {
                 {
                     id : '00000000454d3232ffffffffd0b0c4dd',
                     name : '水西天香',
+                    hidden : true,
                     url : null,
                     icon : 'el-icon-help',
                     children : [
                         {
                             id : '0000000043a8763d000000001f8b393f',
                             name : '文章分类',
+                            hidden : true,
                             url : 'role1'
                         },
                         {
                             id : '000000003bb712cd00000000022090e8',
                             name : '文章管理',
+                            hidden : true,
                             url : 'user1'
                         },
                         {
                             id : '00000000338a27a7ffffffff905a8f9e',
                             name : '轮播图管理',
+                            hidden : true,
                             url : null,
                             icon : 'el-icon-set-up',
                             children : [
                                 {
                                     id : 'ffffffff95beb47dffffffffad7e6abe',
                                     name : '首页轮播图首页轮播图首页',
+                                    hidden : true,
                                     url : 'role2'
                                 },
                                 {
                                     id : 'ffffffffbd471a55ffffffff976c6d1b',
                                     name : '水西天香',
+                                    hidden : true,
                                     url : 'shuixi01'
                                 }
                             ]
@@ -166,6 +176,7 @@ export default {
                 {
                     id : '11ffffffbd471a55ffffffff976c6d11',
                     name : '账号管理',
+                    hidden : true,
                     url : 'menu2'
                 }
             ]
