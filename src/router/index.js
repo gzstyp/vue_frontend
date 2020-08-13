@@ -10,6 +10,7 @@ import NotFound from './../views/NotFound';
 
 Vue.use(VueRouter);
 
+/*所有的路由都静态添加进去,然后动态显示所拥有的菜单*/
 const routes = [
     {path:'/',redirect:'login'},
     {path:'/login',component:Login},
