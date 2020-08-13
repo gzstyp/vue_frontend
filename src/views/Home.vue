@@ -19,25 +19,67 @@
                   :collapse="isCollapse"
                   :collapse-transition="false"
                   :default-active="activeUrl"
-                  @open="handleOpen"
-                  @close="handleClose"
                   background-color="#f3f3f3"
                   text-color="#000"
                   active-text-color="#409eff">
-                    <el-submenu :index="''+item.id" v-for="item in listMenu" :key="item.id">
-                        <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span>{{item.name}}</span>
+                    <template v-for="item in listMenu">
+
+                        <template v-if="item.children">
+                            <el-submenu :index="''+item.id">
+                                <template slot="title">
+                                    <i class="el-icon-location"></i>
+                                    <span>{{item.name}}</span>
+                                </template>
+                                <template v-for="subItem in item.children">
+
+                                    <template v-if="subItem.children">
+
+                                        <el-submenu :index="''+subItem.id">
+
+                                            <template slot="title">
+                                                <i class="el-icon-location"></i>
+                                                <span>{{subItem.name}}</span>
+                                            </template>
+                                            <template v-for="subIt in subItem.children">
+
+                                                <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus('/'+subIt.url,subIt.name)">
+                                                    <template slot="title">
+                                                        <i class="el-icon-location"></i>
+                                                        <span>{{subIt.name}}</span>
+                                                    </template>
+                                                </el-menu-item>
+
+                                            </template>
+
+                                        </el-submenu>
+
+                                    </template>
+                                    <template v-if="!subItem.children">
+
+                                        <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus('/'+subItem.url,subItem.name)">
+                                            <template slot="title">
+                                                <i class="el-icon-location"></i>
+                                                <span>{{subItem.name}}</span>
+                                            </template>
+                                        </el-menu-item>
+
+                                    </template>
+
+                                </template>
+                            </el-submenu>
                         </template>
-                        <el-menu-item :index="'/'+subItem.url" v-for="subItem in item.children" :key="subItem.id" @click="saveNavStatus('/'+subItem.url,subItem.name)">
-                            <template slot="title">
-                                <i class="el-icon-location"></i>
-                                <span>{{subItem.name}}</span>
-                            </template>
-                        </el-menu-item>
-                    </el-submenu>
+
+                        <template v-if="!item.children">
+                            <el-menu-item :index="'/'+item.url" @click="saveNavStatus('/'+item.url,item.name)">
+                                <template slot="title">
+                                    <i class="el-icon-location"></i>
+                                    <span>{{item.name}}</span>
+                                </template>
+                            </el-menu-item>
+                        </template>
+
+                    </template>
                 </el-menu>
-                <div title="显示|收缩" class="toggle-menu" @click="showCollapse"><i :class="isCollapse ? 'el-icon-right' : 'el-icon-back'"></i></div>
 			</el-aside>
             <el-container>
                 <el-main>
@@ -66,48 +108,65 @@ export default {
             activeUrl : '',
             listMenu : [
                 {
-                    id : 10001,
+                    id : '0000000000640033000000000ea4c107',
                     name : '系统管理',
                     url : null,
                     children : [
                         {
-                            id : 100011,
+                            id : '0000000004dfa8b9000000002f4e715c',
                             name : '角色管理',
                             url : 'role'
                         },
                         {
-                            id : 100012,
+                            id : '0000000007c4dd77ffffffffe68454c6',
                             name : '用户管理',
                             url : 'user'
                         },
                         {
-                            id : 100013,
+                            id : '00000000456de029ffffffffc68a479c',
                             name : '系统菜单',
                             url : 'menu'
                         }
                     ]
                 },
                 {
-                    id : 10002,
+                    id : '00000000454d3232ffffffffd0b0c4dd',
                     name : '水西天香',
                     url : null,
                     children : [
                         {
-                            id : 100021,
+                            id : '0000000043a8763d000000001f8b393f',
                             name : '文章分类',
                             url : 'role1'
                         },
                         {
-                            id : 100022,
+                            id : '000000003bb712cd00000000022090e8',
                             name : '文章管理',
                             url : 'user1'
                         },
                         {
-                            id : 100023,
+                            id : '00000000338a27a7ffffffff905a8f9e',
                             name : '轮播图管理',
-                            url : 'menu1'
+                            url : null,
+                            children : [
+                                {
+                                    id : 'ffffffff95beb47dffffffffad7e6abe',
+                                    name : '首页轮播图',
+                                    url : 'role2'
+                                },
+                                {
+                                    id : 'ffffffffbd471a55ffffffff976c6d1b',
+                                    name : '水西天香',
+                                    url : 'shuixi01'
+                                }
+                            ]
                         }
                     ]
+                },
+                {
+                    id : '11ffffffbd471a55ffffffff976c6d11',
+                    name : '账号管理',
+                    url : 'menu2'
                 }
             ]
         }
@@ -158,8 +217,7 @@ export default {
         height: 100%;
     }
     .el-header{
-		background-color: #09AAFF;
-		color: #333;
+        background-color: #09AAFF;
         display: flex;
         justify-content: space-between;
         padding: 0 10px 0 8px;
@@ -167,7 +225,7 @@ export default {
         color: #fff;
         height: 60px;
         line-height: 60px;
-	}
+    }
     .el-header > div{
         display: flex;
         align-items: center;
@@ -190,13 +248,19 @@ export default {
         text-align: center;
         letter-spacing: 0.2em;
     }
-	.el-aside {
-		background-color: #f3f3f3;
+    .el-aside {
+        background-color: #f3f3f3;
         border-right: 1px solid #ddd;
-	}
+    }
+    .el-menu-item, .el-submenu__title{
+        height: 42px;
+        line-height: 42px;
+        padding-left:0 !important;
+        padding-right:0 !important;
+    }
     .toggle-menu{
-        height: 41px;
-        line-height: 41px;
+        height: 42px;
+        line-height: 42px;
         min-width:100%;
         text-align: center;
         cursor: pointer;
@@ -208,11 +272,11 @@ export default {
         border-bottom:1px solid #e0e0e0;
     }
     .el-aside .el-menu{
-		border-right: none;
-	}
-	.el-main {
-		padding: 0px;
-	}
+        border-right: none;
+    }
+    .el-main {
+        padding: 0px;
+    }
     .main-title{
         height: 40px;
         line-height: 40px;
