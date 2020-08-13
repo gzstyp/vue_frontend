@@ -110,11 +110,13 @@ export default {
                 {
                     id : '0000000000640033000000000ea4c107',
                     name : '系统管理',
+                    icon : 'el-icon-setting',
                     url : null,
                     children : [
                         {
                             id : '0000000004dfa8b9000000002f4e715c',
                             name : '角色管理',
+                            icon : 'el-icon-setting',
                             url : 'role'
                         },
                         {
@@ -151,7 +153,7 @@ export default {
                             children : [
                                 {
                                     id : 'ffffffff95beb47dffffffffad7e6abe',
-                                    name : '首页轮播图',
+                                    name : '首页轮播图首页轮播图首页',
                                     url : 'role2'
                                 },
                                 {
@@ -187,12 +189,6 @@ export default {
             sessionStorage.setItem("activeTitle", name);
             this.activeUrl = url;
             this.title = name;
-        },
-        handleOpen : function () {
-
-        },
-        handleClose : function () {
-
         },
         async getListData () {
              const {data : res} = await this.$http.get('/getListMenu');
@@ -257,6 +253,10 @@ export default {
         line-height: 42px;
         padding-left:0 !important;
         padding-right:0 !important;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    li.el-submenu{
+        border-bottom : none !important;
     }
     .toggle-menu{
         height: 42px;
