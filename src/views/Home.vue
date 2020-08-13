@@ -273,7 +273,7 @@ export default {
         border-right: none;
     }
     .el-main {
-        padding: 0px;
+        padding: 0;
     }
     .main-title{
         height: 40px;
