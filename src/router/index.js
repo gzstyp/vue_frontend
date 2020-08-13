@@ -20,7 +20,8 @@ const routes = [
         {path:'/menu',component:Menu},
         {path:'/role1',component:Role},
         {path:'/user1',component:User},
-        {path:'/menu1',component:Menu}
+        {path:'/menu1',component:Menu},
+        {path:'/menu2',component:Menu}
     ]},
     {path:'*',component: NotFound}
 ]
