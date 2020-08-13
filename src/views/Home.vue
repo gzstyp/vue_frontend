@@ -27,7 +27,7 @@
                         <template v-if="item.children">
                             <el-submenu :index="''+item.id">
                                 <template slot="title">
-                                    <i class="el-icon-location"></i>
+                                    <i :class="item.icon"></i>
                                     <span>{{item.name}}</span>
                                 </template>
                                 <template v-for="subItem in item.children">
@@ -37,14 +37,13 @@
                                         <el-submenu :index="''+subItem.id">
 
                                             <template slot="title">
-                                                <i class="el-icon-location"></i>
+                                                <i :class="subItem.icon"></i>
                                                 <span>{{subItem.name}}</span>
                                             </template>
                                             <template v-for="subIt in subItem.children">
 
                                                 <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus('/'+subIt.url,subIt.name)">
                                                     <template slot="title">
-                                                        <i class="el-icon-location"></i>
                                                         <span>{{subIt.name}}</span>
                                                     </template>
                                                 </el-menu-item>
@@ -58,7 +57,6 @@
 
                                         <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus('/'+subItem.url,subItem.name)">
                                             <template slot="title">
-                                                <i class="el-icon-location"></i>
                                                 <span>{{subItem.name}}</span>
                                             </template>
                                         </el-menu-item>
@@ -72,7 +70,6 @@
                         <template v-if="!item.children">
                             <el-menu-item :index="'/'+item.url" @click="saveNavStatus('/'+item.url,item.name)">
                                 <template slot="title">
-                                    <i class="el-icon-location"></i>
                                     <span>{{item.name}}</span>
                                 </template>
                             </el-menu-item>
@@ -116,7 +113,6 @@ export default {
                         {
                             id : '0000000004dfa8b9000000002f4e715c',
                             name : '角色管理',
-                            icon : 'el-icon-setting',
                             url : 'role'
                         },
                         {
@@ -135,6 +131,7 @@ export default {
                     id : '00000000454d3232ffffffffd0b0c4dd',
                     name : '水西天香',
                     url : null,
+                    icon : 'el-icon-help',
                     children : [
                         {
                             id : '0000000043a8763d000000001f8b393f',
@@ -150,6 +147,7 @@ export default {
                             id : '00000000338a27a7ffffffff905a8f9e',
                             name : '轮播图管理',
                             url : null,
+                            icon : 'el-icon-set-up',
                             children : [
                                 {
                                     id : 'ffffffff95beb47dffffffffad7e6abe',
@@ -251,8 +249,8 @@ export default {
     .el-menu-item, .el-submenu__title{
         height: 42px;
         line-height: 42px;
-        padding-left:0 !important;
-        padding-right:0 !important;
+        padding-left:4px !important;
+        padding-right:4px !important;
         border-bottom: 1px solid #e0e0e0;
     }
     li.el-submenu{
@@ -295,5 +293,8 @@ export default {
     }
     .el-menu--collapse{
         width:44px !important;
+    }
+    .el-menu-item{
+        padding-left:20px;
     }
 </style>
