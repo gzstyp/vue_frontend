@@ -31,7 +31,7 @@
                     <template v-for="item in listMenu">
 
                         <template v-if="item.children">
-                            <el-submenu :index="''+item.id">
+                            <el-submenu :index="''+item.kid">
                                 <template slot="title">
                                     <i :class="item.icon"></i>
                                     <span>{{item.name}}</span>
@@ -40,7 +40,7 @@
 
                                     <template v-if="subItem.children">
 
-                                        <el-submenu :index="''+subItem.id">
+                                        <el-submenu :index="''+subItem.kid">
 
                                             <template slot="title">
                                                 <i :class="subItem.icon"></i>
@@ -48,7 +48,7 @@
                                             </template>
                                             <template v-for="subIt in subItem.children">
 
-                                                <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus('/'+subIt.url,subIt.name)" v-if="subIt.hidden">
+                                                <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus(item.kid,'/'+subIt.url,subIt.name)" v-if="subIt.hidden">
                                                     <template slot="title">
                                                         <span>{{subIt.name}}</span>
                                                     </template>
@@ -61,7 +61,7 @@
                                     </template>
                                     <template v-if="!subItem.children">
 
-                                        <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus('/'+subItem.url,subItem.name)" v-if="subItem.hidden">
+                                        <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus(item.kid,'/'+subItem.url,subItem.name)" v-if="subItem.hidden">
                                             <template slot="title">
                                                 <span>{{subItem.name}}</span>
                                             </template>
@@ -74,7 +74,7 @@
                         </template>
 
                         <template v-if="!item.children">
-                            <el-menu-item :index="'/'+item.url" @click="saveNavStatus('/'+item.url,item.name)" v-if="item.hidden">
+                            <el-menu-item :index="'/'+item.url" @click="saveNavStatus(item.kid,'/'+item.url,item.name)" v-if="item.hidden">
                                 <template slot="title">
                                     <span>{{item.name}}</span>
                                 </template>
@@ -87,7 +87,10 @@
             <el-container>
                 <el-main>
                     <!--标题-->
-                    <div class="main-title"><label>{{title}}</label></div>
+                    <!--<div class="main-title"><label>{{title}}</label></div>-->
+                    <div class="main-title">
+                        <Tab/>
+                    </div>
                     <div style="padding: 4px;">
                         <!--路由占位符,即显示路由导航的位置[有两个路由占位符地方,一个是本文件,另一个是在文件src\App.vue] -->
                         <router-view />
@@ -102,36 +105,39 @@
 </template>
 
 <script>
+    import Tab from "../components/Tab";
 export default {
+    components : {
+        Tab
+    },
     data(){
         return {
             aside : true,
             isCollapse : false,
-            title : '欢迎你',
             activeUrl : '',
             loginUser : 'admin',
             listMenu : [
                 {
-                    id : '0000000000640033000000000ea4c107',
+                    kid : '0000000000640033000000000ea4c107',
                     name : '系统管理',
                     icon : 'el-icon-setting',
                     hidden : true,
                     url : null,
                     children : [
                         {
-                            id : '0000000004dfa8b9000000002f4e715c',
+                            kid : '0000000004dfa8b9000000002f4e715c',
                             name : '角色管理',
                             hidden : true,
                             url : 'role'
                         },
                         {
-                            id : '0000000007c4dd77ffffffffe68454c6',
+                            kid : '0000000007c4dd77ffffffffe68454c6',
                             name : '用户管理',
                             hidden : true,
                             url : 'user'
                         },
                         {
-                            id : '00000000456de029ffffffffc68a479c',
+                            kid : '00000000456de029ffffffffc68a479c',
                             name : '系统菜单',
                             hidden : true,
                             url : 'menu'
@@ -139,52 +145,52 @@ export default {
                     ]
                 },
                 {
-                    id : '00000000454d3232ffffffffd0b0c4dd',
+                    kid : '00000000454d3232ffffffffd0b0c4dd',
                     name : '水西天香',
                     hidden : true,
                     url : null,
                     icon : 'el-icon-help',
                     children : [
                         {
-                            id : '0000000043a8763d000000001f8b393f',
+                            kid : '0000000043a8763d000000001f8b393f',
                             name : '文章分类',
                             hidden : true,
-                            url : 'role1'
+                            url : 'articleClass'
                         },
                         {
-                            id : '000000003bb712cd00000000022090e8',
+                            kid : '000000003bb712cd00000000022090e8',
                             name : '文章管理',
                             hidden : true,
-                            url : 'user1'
+                            url : 'articleManager'
                         },
                         {
-                            id : '00000000338a27a7ffffffff905a8f9e',
-                            name : '轮播图管理',
+                            kid : '00000000338a27a7ffffffff905a8f9e',
+                            name : '数据库与软件版本管理',
                             hidden : true,
                             url : null,
                             icon : 'el-icon-set-up',
                             children : [
                                 {
-                                    id : 'ffffffff95beb47dffffffffad7e6abe',
-                                    name : '首页轮播图首页轮播图首页',
+                                    kid : 'ffffffff95beb47dffffffffad7e6abe',
+                                    name : '数据库定期维护管理列表',
                                     hidden : true,
-                                    url : 'role2'
+                                    url : 'database'
                                 },
                                 {
-                                    id : 'ffffffffbd471a55ffffffff976c6d1b',
-                                    name : '水西天香',
+                                    kid : 'ffffffffbd471a55ffffffff976c6d1b',
+                                    name : '软件版本管理',
                                     hidden : true,
-                                    url : 'user'
+                                    url : 'software'
                                 }
                             ]
                         }
                     ]
                 },
                 {
-                    id : '11ffffffbd471a55ffffffff976c6d11',
-                    name : '账号管理',
+                    kid : '11ffffffbd471a55ffffffff976c6d11',
+                    name : '个人信息',
                     hidden : true,
-                    url : 'menu2'
+                    url : 'persion'
                 }
             ]
         }
@@ -200,11 +206,10 @@ export default {
         showCollapse : function () {
             this.isCollapse = !this.isCollapse;
         },
-        saveNavStatus : function(url,name){
+        saveNavStatus : function(kid,url,name){
             sessionStorage.setItem("activeUrl", url);
-            sessionStorage.setItem("activeTitle", name);
             this.activeUrl = url;
-            this.title = name;
+            this.$store.commit('selectMenu',{name:name,url:url});
         },
         async getListData () {
              const {data : res} = await this.$http.get('/getListMenu');
@@ -215,11 +220,6 @@ export default {
         if (_active){
             this.activeUrl = _active;
         }
-        var _title = sessionStorage.getItem('activeTitle');
-        if (_title){
-            this.title = _title;
-        }
-        //this.getListData();
     }
 }
 </script>

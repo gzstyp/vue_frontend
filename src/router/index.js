@@ -8,6 +8,12 @@ import Menu from './../views/Menu';
 import Welcome from './../views/Welcome';
 import NotFound from './../views/NotFound';
 
+import ArticleClass from "../views/ArticleClass";
+import ArticleManager from "../views/ArticleManager";
+import Persion from "../views/Persion";
+import Database from "../views/Database";
+import Software from "../views/Software";
+
 Vue.use(VueRouter);
 
 /*所有的路由都静态添加进去,然后动态显示所拥有的菜单*/
@@ -19,10 +25,11 @@ const routes = [
         {path:'/role',component:Role},
         {path:'/user',component:User},
         {path:'/menu',component:Menu},
-        {path:'/role1',component:Role},
-        {path:'/user1',component:User},
-        {path:'/menu1',component:Menu},
-        {path:'/menu2',component:Menu}
+        {path:'/articleClass',component:ArticleClass},
+        {path:'/articleManager',component:ArticleManager},
+        {path:'/database',component:Database},
+        {path:'/software',component:Software},
+        {path:'/persion',component:Persion}
     ]},
     {path:'*',component: NotFound}
 ]

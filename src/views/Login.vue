@@ -40,7 +40,7 @@ export default {
         login : function (){
             this.$message.success('登录成功');
             window.sessionStorage.setItem('token','102420485120');
-            this.$router.push('/home');/*采用的是编程式导航,进行页面跳转*/
+            this.$router.push({path : '/home'});//采用的是编程式导航,进行页面跳转
         },
         resetData(){
             this.loginForm.userName = '';
@@ -49,7 +49,6 @@ export default {
     },
     created(){
         sessionStorage.removeItem('activeUrl');
-        sessionStorage.setItem("activeTitle",'欢迎你');
     }
 }
 </script>
