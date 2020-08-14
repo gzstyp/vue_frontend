@@ -34,11 +34,6 @@ const routes = [
     {path:'*',component: NotFound}
 ]
 
-/*const router = new Router({
-    routes : routes,
-    mode : 'history'
-});*/
-
 const router = new VueRouter({
     routes,
     scrollBehavior (to, from, savedPosition){
