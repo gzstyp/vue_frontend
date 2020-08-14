@@ -21,3 +21,15 @@ li.el-submenu .el-menu-item{
     height:42px;
     line-height:42px;
 }
+/*按钮样式开始*/
+.el-button{
+    padding:10px 18px;
+}
+.el-input__inner{
+    height: 36px;
+    line-height: 36px;
+}
+.el-button{
+    margin-left:2px;
+}
+/*按钮样式结束*/

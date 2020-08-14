@@ -174,7 +174,7 @@ export default {
                                     id : 'ffffffffbd471a55ffffffff976c6d1b',
                                     name : '水西天香',
                                     hidden : true,
-                                    url : 'shuixi01'
+                                    url : 'user'
                                 }
                             ]
                         }
@@ -232,7 +232,7 @@ export default {
         background-color: #09aaff;
         display: flex;
         justify-content: space-between;
-        padding: 0 10px 0 6px;
+        padding: 0 2px 0 6px;
         color: #fff;
         height: 44px !important;
         line-height: 44px !important;
