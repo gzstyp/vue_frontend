@@ -222,7 +222,7 @@ export default {
         height: 100%;
     }
     .el-header{
-        background-color: #09AAFF;
+        background-color: #09aaff;
         display: flex;
         justify-content: space-between;
         padding: 0 10px 0 8px;
@@ -306,6 +306,9 @@ export default {
         width:44px !important;
     }
     .el-menu-item{
-        padding-left:20px;
+        padding-left:10px;
+    }
+    .el-menu-item:focus,.el-menu-item.is-active{
+        /*background: url("../assets/images/zfx04.svg") no-repeat right;*/
     }
 </style>
