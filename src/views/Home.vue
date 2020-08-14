@@ -1,14 +1,20 @@
 <template>
     <el-container class="home-container">
         <el-header>
-            <div class="top-left">
+            <div>
                 <img src="../assets/logo.jpg" alt="logo">
-                <label>管理系统服务平台</label>
-                <!--<el-button class="toggle-button" @click="showHide()">{{aside ? '隐藏' : '显示'}}</el-button>-->
+                <label>贵州救灾物资中心</label>
                 <i @click="showHide()" style="font-size: 24px;cursor: pointer;" title="隐藏|显示导航" :class="aside ? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i>
             </div>
-            <div class="top-right">
-                <el-button @click="logout()">退出</el-button>
+            <div>
+                <el-dropdown size="medium" split-button>
+                    {{loginUser}}
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item icon="el-icon-plus">个人信息</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-circle-plus">修改密码</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-close" @click.native="logout()">退出登录</el-dropdown-item><!--添加.native属性表示是支持原生的方法,因为组件 el-dropdown 不提供click方法-->
+                    </el-dropdown-menu>
+                </el-dropdown>
             </div>
         </el-header>
         <el-container>
@@ -103,6 +109,7 @@ export default {
             isCollapse : false,
             title : '欢迎你',
             activeUrl : '',
+            loginUser : 'admin',
             listMenu : [
                 {
                     id : '0000000000640033000000000ea4c107',
@@ -225,24 +232,23 @@ export default {
         background-color: #09aaff;
         display: flex;
         justify-content: space-between;
-        padding: 0 10px 0 8px;
-        align-items: center;
+        padding: 0 10px 0 6px;
         color: #fff;
-        height: 60px;
-        line-height: 60px;
+        height: 44px !important;
+        line-height: 44px !important;
     }
     .el-header > div{
         display: flex;
         align-items: center;
     }
     .el-header > div img{
-        height: 50px;
-        width: 50px;
+        height: 36px;
+        width: 36px;
         border-radius: 50%;
     }
     .el-header label{
         font-size: 22px;
-        margin-left: 15px;
+        margin-left:4px;
     }
     .toggle-button0{
         background-color: #4a5064;
@@ -287,8 +293,8 @@ export default {
         padding: 0;
     }
     .main-title{
-        height: 40px;
-        line-height: 40px;
+        height: 42px;
+        line-height: 42px;
         width: 100%;
         background-color: #f5f5f5;
     }
@@ -299,8 +305,8 @@ export default {
         background-color: #F2F6FC;
         color: #333;
         text-align: center;
-        line-height: 60px;
-        height: 60px;
+        line-height: 44px !important;
+        height: 44px !important;
     }
     .el-menu--collapse{
         width:44px !important;
