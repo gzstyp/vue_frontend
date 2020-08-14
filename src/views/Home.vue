@@ -216,7 +216,7 @@ export default {
         //const name = sessionStorage.getItem('activeName');
         //const url = sessionStorage.getItem('activeUrl');
         this.$router.push('/welcome');
-        this.$store.commit('refreshPage',{refresh:true});
+        //this.$store.commit('refreshPage',{refresh:true});
     },
     created(){
     }
