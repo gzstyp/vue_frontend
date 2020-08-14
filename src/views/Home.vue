@@ -298,9 +298,11 @@ export default {
         padding: 0;
     }
     .main-title{
+        display:flex;
+        justify-content:start;
+        align-items:center;
         height: 42px;
-        line-height: 42px;
-        width: 100%;
+        padding-left:2px;
         background-color: #f5f5f5;
         overflow:hidden;
     }

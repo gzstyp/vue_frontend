@@ -38,6 +38,7 @@
 }
 .home .userInfo .name{
     font-size:28px;
+    color:#09aaff;
 }
 .home .userInfo .access{
     color:#999;
@@ -52,4 +53,3 @@
     margin-left:10px;
     color:#666;
 }
-

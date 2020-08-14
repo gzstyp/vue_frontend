@@ -23,7 +23,7 @@
                 <el-card shadow="hover" v-for="(item,index) in countData" :key="index">
                     <i :class="`${item.icon}`"></i><!--可以拼接字符串-->
                     <div class="detail">
-                        <p :style="{'color':item.color,fontSize:'30px'}">￥{{item.value}}</p>
+                        <p :style="{'color':item.color,fontSize:'30px'}">{{item.value}}</p>
                         <p :style="{'color':`${item.color}`}">{{item.name}}</p>
                     </div>
                 </el-card>
@@ -44,7 +44,7 @@
 </template>
 <script>
     export default {
-        name : "Home",
+        name : "Welcome",
         mounted(){
 
         },
@@ -53,37 +53,37 @@
                 userImg : require('../assets/logo.jpg'),//显示默认的图片
                 countData : [
                     {
-                        name : '今日支付订单',
+                        name : '楼层数量',
                         value : '1250',
                         icon : 'el-icon-price-tag',
                         color : '#0ed8ea'
                     },
                     {
-                        name : '今日收藏订单',
+                        name : '摄像头数量',
                         value : '120',
                         icon : 'el-icon-star-off',
                         color : '#28801d'
                     },
                     {
-                        name : '今日未支付订单',
+                        name : '已损坏个数',
                         value : '100',
                         icon : 'el-icon-baseball',
                         color : '#181d78'
                     },
                     {
-                        name : '本月支付订单',
+                        name : '货位数量',
                         value : '1520',
                         icon : 'el-icon-refrigerator',
                         color : '#417dd7'
                     },
                     {
-                        name : '本月收藏订单',
+                        name : '空位数量',
                         value : '80',
                         icon : 'el-icon-orange',
                         color : '#117979'
                     },
                     {
-                        name : '今日取消订单',
+                        name : '已满货位',
                         value : '850',
                         icon : 'el-icon-ice-tea',
                         color : '#175e0e'
