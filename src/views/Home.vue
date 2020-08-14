@@ -105,9 +105,7 @@
 <script>
     import Tab from "../components/Tab";
 export default {
-    components : {
-        Tab
-    },
+    components : {Tab},
     data(){
         return {
             aside : true,
@@ -194,7 +192,7 @@ export default {
     },
     methods : {
         logout : function (){
-            window.sessionStorage.clear();
+            this.$store.commit('clearMenu');
             this.$router.push('/login');/*采用的是编程式导航,页面跳转*/
         },
         showHide : function () {
