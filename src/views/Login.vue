@@ -38,6 +38,7 @@ export default {
 	},
     methods : {
         login : function (){
+            this.$store.commit('clearMenu');//防止二次登录
             this.$message.success('登录成功');
             window.sessionStorage.setItem('token','102420485120');
             this.$router.push({path : '/home'});//采用的是编程式导航,进行页面跳转
@@ -47,7 +48,8 @@ export default {
             this.loginForm.password = '';
         }
     },
-    created(){
+    beforeCreate(){
+        sessionStorage.removeItem('activeName');
         sessionStorage.removeItem('activeUrl');
     }
 }

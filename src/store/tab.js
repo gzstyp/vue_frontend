@@ -22,20 +22,16 @@ export default {
                 state.currentMenu = {};
             }
         },
+        refreshPage(state){
+            state.tabsList = [{url : '/welcome',name : '首页'}];//刷新时加载首页
+        },
         closeTab(state,provider){
             let result = state.tabsList.findIndex(item => item.url === provider.url);
             state.tabsList.splice(result,1);
         },
-        /*保存菜单数据,用于页面刷新重新获取数据*/
-        setMenu (state,provider){
-            state.menu = provider;
-            sessionStorage.removeItem('menus');
-            sessionStorage.setItem('menus',JSON.stringify(provider));//序列化,使用sessionStorage获取或保存是防止用户页面刷新而导致数据丢失
-        },
         /*清除菜单,用于退出登录或防止二次登录*/
         clearMenu (state){
             state.menu = [];
-            sessionStorage.removeItem('menus');
             sessionStorage.clear();
         }
     },

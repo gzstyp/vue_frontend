@@ -24,7 +24,7 @@
                   router
                   :collapse="isCollapse"
                   :collapse-transition="false"
-                  :default-active="activeUrl"
+                  :default-active="$route.path"
                   background-color="#f3f3f3"
                   text-color="#000"
                   active-text-color="#409eff">
@@ -48,7 +48,7 @@
                                             </template>
                                             <template v-for="subIt in subItem.children">
 
-                                                <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus(item.kid,'/'+subIt.url,subIt.name)" v-if="subIt.hidden">
+                                                <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus('/'+subIt.url,subIt.name)" v-if="subIt.hidden">
                                                     <template slot="title">
                                                         <span>{{subIt.name}}</span>
                                                     </template>
@@ -61,7 +61,7 @@
                                     </template>
                                     <template v-if="!subItem.children">
 
-                                        <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus(item.kid,'/'+subItem.url,subItem.name)" v-if="subItem.hidden">
+                                        <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus('/'+subItem.url,subItem.name)" v-if="subItem.hidden">
                                             <template slot="title">
                                                 <span>{{subItem.name}}</span>
                                             </template>
@@ -72,9 +72,8 @@
                                 </template>
                             </el-submenu>
                         </template>
-
                         <template v-if="!item.children">
-                            <el-menu-item :index="'/'+item.url" @click="saveNavStatus(item.kid,'/'+item.url,item.name)" v-if="item.hidden">
+                            <el-menu-item :index="'/'+item.url" @click="saveNavStatus('/'+item.url,item.name)" v-if="item.hidden">
                                 <template slot="title">
                                     <span>{{item.name}}</span>
                                 </template>
@@ -87,7 +86,6 @@
             <el-container>
                 <el-main>
                     <!--标题-->
-                    <!--<div class="main-title"><label>{{title}}</label></div>-->
                     <div class="main-title">
                         <Tab/>
                     </div>
@@ -114,7 +112,6 @@ export default {
         return {
             aside : true,
             isCollapse : false,
-            activeUrl : '',
             loginUser : 'admin',
             listMenu : [
                 {
@@ -196,7 +193,7 @@ export default {
         }
     },
     methods : {
-        logout : function () {
+        logout : function (){
             window.sessionStorage.clear();
             this.$router.push('/login');/*采用的是编程式导航,页面跳转*/
         },
@@ -206,20 +203,22 @@ export default {
         showCollapse : function () {
             this.isCollapse = !this.isCollapse;
         },
-        saveNavStatus : function(kid,url,name){
-            sessionStorage.setItem("activeUrl", url);
-            this.activeUrl = url;
+        saveNavStatus : function(url,name){
+            //sessionStorage.setItem("activeUrl",url);
+            //sessionStorage.setItem("activeName",name);
             this.$store.commit('selectMenu',{name:name,url:url});
         },
         async getListData () {
              const {data : res} = await this.$http.get('/getListMenu');
         }
     },
-    created() {
-        var _active = sessionStorage.getItem('activeUrl');
-        if (_active){
-            this.activeUrl = _active;
-        }
+    beforeCreate(){
+        //const name = sessionStorage.getItem('activeName');
+        //const url = sessionStorage.getItem('activeUrl');
+        this.$router.push('/welcome');
+        this.$store.commit('refreshPage',{refresh:true});
+    },
+    created(){
     }
 }
 </script>
