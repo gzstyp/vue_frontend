@@ -47,10 +47,6 @@ export default {
             this.loginForm.userName = '';
             this.loginForm.password = '';
         }
-    },
-    beforeCreate(){
-        sessionStorage.removeItem('activeName');
-        sessionStorage.removeItem('activeUrl');
     }
 }
 </script>

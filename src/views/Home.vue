@@ -19,9 +19,9 @@
         </el-header>
         <el-container>
             <el-aside :width="isCollapse ? '45px': '220px'" v-if="aside">
+                <!--若是启用属性 el-menu 的 router 的话,那无法控制标签页的数量-->
                 <el-menu
                   unique-opened
-                  router
                   :collapse="isCollapse"
                   :collapse-transition="false"
                   :default-active="$route.path"
@@ -203,22 +203,28 @@ export default {
         showCollapse : function () {
             this.isCollapse = !this.isCollapse;
         },
+        /*若是启用属性 el-menu 的 router 的话,那无法控制标签页的数量*/
         saveNavStatus : function(url,name){
-            //sessionStorage.setItem("activeUrl",url);
-            //sessionStorage.setItem("activeName",name);
-            this.$store.commit('selectMenu',{name:name,url:url});
+            const tabs = this.$store.state.tab.tabsList;
+            const len = tabs.length;
+            if(len > 5){
+                let result = tabs.findIndex(item => item.url === url);
+                if(result === -1){
+                    this.$message.warning('标签页太多,先关闭再打开');
+                }else{
+                    this.$router.push({path:url});
+                }
+            }else{
+                this.$store.commit('selectMenu',{name:name,url:url});
+                this.$router.push({path:url});
+            }
         },
         async getListData () {
              const {data : res} = await this.$http.get('/getListMenu');
         }
     },
     beforeCreate(){
-        //const name = sessionStorage.getItem('activeName');
-        //const url = sessionStorage.getItem('activeUrl');
-        this.$router.push('/welcome');
-        //this.$store.commit('refreshPage',{refresh:true});
-    },
-    created(){
+        this.$router.push({path:'/welcome'});//刷新默认加载首页|欢迎页
     }
 }
 </script>
@@ -296,9 +302,7 @@ export default {
         line-height: 42px;
         width: 100%;
         background-color: #f5f5f5;
-    }
-    .main-title label{
-        margin-left:6px
+        overflow:hidden;
     }
     .el-footer {
         background-color: #F2F6FC;

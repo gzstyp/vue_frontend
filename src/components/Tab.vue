@@ -40,7 +40,7 @@
 </script>
 <style scoped>
     .el-tag,.el-tag--light{
-        margin-right:2px;
+        margin-right:1px;
         cursor:pointer;
     }
 </style>
