@@ -24,7 +24,7 @@ export default {
         /*清除菜单,用于退出登录或防止二次登录*/
         clearMenu (state){
             sessionStorage.clear();
-            state.tabsList = [{url : '/welcome',name : '欢迎页'}]
+            state.tabsList = [{url : '/welcome',name : '欢迎页'}];
         }
     },
     actions: {}
