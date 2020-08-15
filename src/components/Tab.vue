@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- :closable="tag.path !== 'home'" 表示不等于首页时才显示关闭按钮 -->
+        <!-- :closable="tag.url !== '/welcome'" 表示不等于首页时才显示关闭按钮 -->
         <el-tag :key="tag.name" v-for="tag in tags" :closable="tag.url !== '/welcome'" :disable-transitions="false"
                 @close="handleClose(tag)"
                 @click="changeMenu(tag)"
