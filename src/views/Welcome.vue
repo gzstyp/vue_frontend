@@ -1,5 +1,5 @@
 <template>
-    <el-row class="home" :gutter="6">
+    <el-row class="home">
         <el-col :span="8">
             <el-card shadow="hover" style="height:290px">
                 <div class="user">

@@ -89,9 +89,9 @@
                     <div class="main-title">
                         <Tab/>
                     </div>
-                    <div style="padding: 4px;">
+                    <div style="padding:2px;">
                         <!--路由占位符,即显示路由导航的位置[有两个路由占位符地方,一个是本文件,另一个是在文件src\App.vue] -->
-                        <router-view />
+                        <router-view/>
                     </div>
                 </el-main>
                 <el-footer>
