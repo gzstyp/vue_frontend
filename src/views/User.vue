@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-card>
+        <el-card shadow="never">
             <el-row :gutter="5">
                 <el-col :span="6">
                     <el-input placeholder="请输入内容">

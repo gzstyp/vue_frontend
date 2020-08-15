@@ -5,9 +5,6 @@ html,body,#app{
     list-style:none;
     text-decoration:none;
 }
-.el-card{
-    box-shadow: 0 0 1px rgba(0,0,0,0.15) !important;/*!important 可以提高权重*/
-}
 .el-card__body{
     padding: 2px;
 }
