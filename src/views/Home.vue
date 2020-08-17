@@ -32,7 +32,7 @@
                         <template v-if="item.children">
                             <el-submenu :index="''+item.kid">
                                 <template slot="title">
-                                    <i :class="item.icon"></i>
+                                    <i :class="item.icon" style="color:#09aaff"></i>
                                     <span>{{item.name}}</span>
                                 </template>
                                 <template v-for="subItem in item.children">
@@ -42,7 +42,7 @@
                                         <el-submenu :index="''+subItem.kid">
 
                                             <template slot="title">
-                                                <i :class="subItem.icon"></i>
+                                                <i :class="subItem.icon" style="color:#09aaff"></i>
                                                 <span>{{subItem.name}}</span>
                                             </template>
                                             <template v-for="subIt in subItem.children">
