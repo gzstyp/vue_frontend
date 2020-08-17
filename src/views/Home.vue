@@ -18,11 +18,10 @@
             </div>
         </el-header>
         <el-container>
-            <el-aside :width="isCollapse ? '45px': '220px'" v-if="aside">
+            <el-aside :width="'220px'" v-if="aside">
                 <!--若是启用属性 el-menu 的 router 的话,那无法控制标签页的数量-->
                 <el-menu
                   unique-opened
-                  :collapse="isCollapse"
                   :collapse-transition="false"
                   :default-active="$route.path"
                   background-color="#f3f3f3"
@@ -109,7 +108,6 @@ export default {
     data(){
         return {
             aside : true,
-            isCollapse : false,
             loginUser : 'admin',
             listMenu : [
                 {
@@ -198,14 +196,11 @@ export default {
         showHide : function () {
             this.aside = !this.aside;
         },
-        showCollapse : function () {
-            this.isCollapse = !this.isCollapse;
-        },
         /*若是启用属性 el-menu 的 router 的话,那无法控制标签页的数量*/
         saveNavStatus : function(url,name){
             const tabs = this.$store.state.tab.tabsList;
             const len = tabs.length;
-            if(len > 5){
+            if(len > 6){
                 let result = tabs.findIndex(item => item.url === url);
                 if(result === -1){
                     this.$message.warning('标签页太多,先关闭再打开');
