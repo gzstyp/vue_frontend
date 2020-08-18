@@ -58,28 +58,34 @@ export default {
                     url : null,
                     children : [
                         {
-                            kid : '0000000004dfa8b9000000002f4e715c',
-                            name : '角色管理',
-                            hidden : true,
-                            url : 'role'
-                        },
-                        {
-                            kid : '0000000007c4dd77ffffffffe68454c6',
-                            name : '用户管理',
-                            hidden : true,
-                            url : 'user'
-                        },
-                        {
                             kid : '00000000456de029ffffffffc68a479c',
                             name : '系统菜单',
                             hidden : true,
                             url : 'menu'
+                        },
+                        {
+                            kid : '0000000007c4dd77ffffffffe68454c6',
+                            name : '系统账号',
+                            hidden : true,
+                            url : 'user'
+                        },
+                        {
+                            kid : '0000000004dfa8b9000000002f4e715c',
+                            name : '角色权限',
+                            hidden : true,
+                            url : 'role'
+                        },
+                        {
+                            kid : '1110000004dfa8b9000000002f4e1111',
+                            name : '数据字典',
+                            hidden : true,
+                            url : 'dict'
                         }
                     ]
                 },
                 {
                     kid : '00000000454d3232ffffffffd0b0c4dd',
-                    name : '水西天香',
+                    name : '数据维护',
                     hidden : true,
                     url : null,
                     icon : 'el-icon-help',
@@ -98,20 +104,20 @@ export default {
                         },
                         {
                             kid : '00000000338a27a7ffffffff905a8f9e',
-                            name : '数据库与软件版本管理',
+                            name : '水西天香',
                             hidden : true,
                             url : null,
                             icon : 'el-icon-set-up',
                             children : [
                                 {
                                     kid : 'ffffffff95beb47dffffffffad7e6abe',
-                                    name : '数据库定期维护管理列表',
+                                    name : '数据库',
                                     hidden : true,
                                     url : 'database'
                                 },
                                 {
                                     kid : 'ffffffffbd471a55ffffffff976c6d1b',
-                                    name : '软件版本管理',
+                                    name : '软件版本',
                                     hidden : true,
                                     url : 'software'
                                 }

@@ -23,6 +23,7 @@ const routes = [
     {path:'/home',component:Home,redirect:'/welcome',children:[
         {path:'/welcome',component:Welcome},
         {path:'/role',component:Role},
+        {path:'/dict',component:() => import('../views/Dict')},
         {path:'/user',component:User},
         {path:'/menu',component:Menu},
         {path:'/articleClass',component:ArticleClass},
