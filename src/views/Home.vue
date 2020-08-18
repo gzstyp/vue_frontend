@@ -19,68 +19,7 @@
         </el-header>
         <el-container>
             <el-aside :width="'220px'" v-if="aside">
-                <!--若是启用属性 el-menu 的 router 的话,那无法控制标签页的数量-->
-                <el-menu
-                  unique-opened
-                  :collapse-transition="false"
-                  :default-active="$route.path"
-                  background-color="#f3f3f3"
-                  text-color="#000"
-                  active-text-color="#409eff">
-                    <template v-for="item in listMenu">
-
-                        <template v-if="item.children">
-                            <el-submenu :index="''+item.kid">
-                                <template slot="title">
-                                    <i :class="item.icon" style="color:#409eff"></i>
-                                    <span>{{item.name}}</span>
-                                </template>
-                                <template v-for="subItem in item.children">
-
-                                    <template v-if="subItem.children">
-
-                                        <el-submenu :index="''+subItem.kid">
-
-                                            <template slot="title">
-                                                <i :class="subItem.icon" style="color:#409eff"></i>
-                                                <span>{{subItem.name}}</span>
-                                            </template>
-                                            <template v-for="subIt in subItem.children">
-
-                                                <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus('/'+subIt.url,subIt.name)" v-if="subIt.hidden">
-                                                    <template slot="title">
-                                                        <span>{{subIt.name}}</span>
-                                                    </template>
-                                                </el-menu-item>
-
-                                            </template>
-
-                                        </el-submenu>
-
-                                    </template>
-                                    <template v-if="!subItem.children">
-
-                                        <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus('/'+subItem.url,subItem.name)" v-if="subItem.hidden">
-                                            <template slot="title">
-                                                <span>{{subItem.name}}</span>
-                                            </template>
-                                        </el-menu-item>
-
-                                    </template>
-
-                                </template>
-                            </el-submenu>
-                        </template>
-                        <template v-if="!item.children">
-                            <el-menu-item :index="'/'+item.url" @click="saveNavStatus('/'+item.url,item.name)" v-if="item.hidden">
-                                <template slot="title">
-                                    <span>{{item.name}}</span>
-                                </template>
-                            </el-menu-item>
-                        </template>
-
-                    </template>
-                </el-menu>
+                <TreeMenu :listMenu="listMenu"/>
 			</el-aside>
             <el-container>
                 <el-main>
@@ -103,8 +42,9 @@
 
 <script>
     import Tab from "../components/Tab";
+    import TreeMenu from "../components/TreeMenu";
 export default {
-    components : {Tab},
+    components : {Tab,TreeMenu},
     data(){
         return {
             aside : true,
@@ -196,22 +136,6 @@ export default {
         showHide : function () {
             this.aside = !this.aside;
         },
-        /*若是启用属性 el-menu 的 router 的话,那无法控制标签页的数量*/
-        saveNavStatus : function(url,name){
-            const tabs = this.$store.state.tab.tabsList;
-            const len = tabs.length;
-            if(len > 6){
-                let result = tabs.findIndex(item => item.url === url);
-                if(result === -1){
-                    this.$message.warning('标签页太多,先关闭再打开');
-                }else{
-                    this.$router.push({path:url});
-                }
-            }else{
-                this.$store.commit('selectMenu',{name:name,url:url});
-                this.$router.push({path:url});
-            }
-        },
         async getListData () {
              const {data : res} = await this.$http.get('/getListMenu');
         }
@@ -248,7 +172,11 @@ export default {
         font-size: 22px;
         margin-left:4px;
     }
-    .toggle-button0{
+    .el-aside {
+        background-color: #f3f3f3;
+        border-right: 1px solid #ddd;
+    }
+    .toggle-button{
         background-color: #4a5064;
         font-size: 10px;
         line-height: 24;
@@ -256,36 +184,6 @@ export default {
         color: #fff;
         text-align: center;
         letter-spacing: 0.2em;
-    }
-    .el-aside {
-        background-color: #f3f3f3;
-        border-right: 1px solid #ddd;
-    }
-    .el-menu-item, .el-submenu__title{
-        height: 42px;
-        line-height: 42px;
-        padding-left:4px !important;
-        padding-right:4px !important;
-        border-bottom: 1px solid #e0e0e0;
-    }
-    li.el-submenu{
-        border-bottom : none !important;
-    }
-    .toggle-menu{
-        height: 42px;
-        line-height: 42px;
-        min-width:100%;
-        text-align: center;
-        cursor: pointer;
-        letter-spacing: 0.2em;
-        border-bottom: 1px solid #e0e0e0;
-        color: #000;
-    }
-    li.el-submenu {
-        border-bottom:1px solid #e0e0e0;
-    }
-    .el-aside .el-menu{
-        border-right: none;
     }
     .el-main {
         padding: 0;
@@ -305,14 +203,5 @@ export default {
         text-align: center;
         line-height: 44px !important;
         height: 44px !important;
-    }
-    .el-menu--collapse{
-        width:44px !important;
-    }
-    .el-menu-item{
-        padding-left:10px;
-    }
-    .el-menu-item:focus,.el-menu-item.is-active{
-        /*background: url("../assets/images/zfx04.svg") no-repeat right;*/
     }
 </style>

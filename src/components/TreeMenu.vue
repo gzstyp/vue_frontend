@@ -124,4 +124,7 @@
     .el-menu-item:focus,.el-menu-item.is-active{
         /*background: url("../assets/images/zfx04.svg") no-repeat right;*/
     }
+    .el-submenu [class^=el-icon-]{
+        margin-right:0;
+    }
 </style>
