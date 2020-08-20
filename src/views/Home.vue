@@ -10,7 +10,7 @@
                 <el-dropdown size="medium" split-button>
                     {{loginUser}}
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item icon="el-icon-plus">个人信息</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-plus" @click.native="dropdownOpts('/persion','个人信息')">个人信息</el-dropdown-item>
                         <el-dropdown-item icon="el-icon-circle-plus">修改密码</el-dropdown-item>
                         <el-dropdown-item icon="el-icon-close" @click.native="logout()">退出登录</el-dropdown-item><!--添加.native属性表示是支持原生的方法,因为组件 el-dropdown 不提供click方法-->
                     </el-dropdown-menu>
@@ -138,6 +138,10 @@ export default {
         logout : function (){
             this.$store.commit('clearMenu');
             this.$router.push('/login');/*采用的是编程式导航,页面跳转*/
+        },
+        dropdownOpts : function (url,name){
+            this.$store.commit('selectMenu',{name:name,url:url});
+            this.$router.push({path:url});
         },
         showHide : function () {
             this.aside = !this.aside;
