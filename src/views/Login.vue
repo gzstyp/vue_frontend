@@ -13,8 +13,7 @@
                 </el-form-item>
             </el-form>
             <el-row type="flex" justify="center" class="btns">
-                <el-button type="primary" @click="login()">登录认证</el-button>
-                <el-button type="info" @click="resetData()" plain>重置数据</el-button>
+                <el-button type="primary" @click="login()" :loading="loadAjax">登录认证</el-button>
             </el-row>
         </div>
     </div>
@@ -27,7 +26,8 @@ export default {
 			loginForm : {
                 username : '',
 				password : ''
-			}
+			},
+            loadAjax : false
 		}
 	},
     methods : {
@@ -42,7 +42,9 @@ export default {
                 this.$message.error('请输入登录密码!');
                 return;
             }
+            this.loadAjax = true;
             this.httpReq.post(this.apis.user.login,this.loginForm,(data) =>{
+                this.loadAjax = false;
                 if(data.code === 200){
                     this.$store.commit('clearMenu');//防止二次登录
                     this.$message.success('登录成功');
@@ -55,6 +57,7 @@ export default {
                     this.$message.warning(data.msg);
                 }
             },(error) =>{
+                this.loadAjax = false;
                 this.$message.error('连接服务器失败');
             });
         },
@@ -62,6 +65,15 @@ export default {
             this.loginForm.username = '';
             this.loginForm.password = '';
         }
+    },
+    created(){
+        var _this = this;
+        document.onkeydown = function(e) {
+            let key = window.event.keyCode;
+            if (key === 13) {
+                _this.login();
+            }
+        };
     }
 }
 </script>
@@ -105,15 +117,7 @@ export default {
         background-color: #eee;
     }
     .btns{
-        margin-top:20px;
-        margin-left:120px;
-        position:absolute;
-        bottom: 24px;
-    }
-    .login_form_bak{
-        position:absolute;
-        width: 97%;
-        top: 100px;
+        bottom: -240px;
     }
     .login_form{
         position:absolute;
