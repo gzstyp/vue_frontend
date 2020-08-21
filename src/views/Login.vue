@@ -27,12 +27,6 @@ export default {
 			loginForm : {
                 username : '',
 				password : ''
-			},
-			rules: {
-				username : [
-                    {required: true, message:'请输入活动名称',trigger:'blur'},
-                    {min: 3, max: 5, message:'长度在 3 到 5 个字符', trigger:'blur'}
-                ]
 			}
 		}
 	},
@@ -51,12 +45,12 @@ export default {
             this.httpReq.post(this.apis.user.login,this.loginForm,(data) =>{
                 if(data.code === 200){
                     this.$store.commit('clearMenu');//防止二次登录
-                    this.$message.success('登录成0功');
+                    this.$message.success('登录成功');
                     sessionStorage.setItem('access_token',data.data.accessToken);
                     sessionStorage.setItem('refresh_token',data.data.refreshToken);
                     sessionStorage.setItem('userName',data.data.userName);
+                    sessionStorage.setItem('menuData',data.data.menuData);
                     this.$router.push({path : '/home'});//采用的是编程式导航,进行页面跳转
-                    //console.info(data.data.menuData);
                 }else{
                     this.$message.warning(data.msg);
                 }
