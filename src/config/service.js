@@ -1,13 +1,19 @@
 import axios from "axios";
-//创建axios实例
+//创建axios实例,本实例不包含表单里有文件上传功能
 const service = axios.create({
     timeout : 10000
 });
 
 //请求拦截器,好使!!!但需要后端要支持才行
 service.interceptors.request.use(function(config){
-    config.headers.access_token = sessionStorage.getItem('access_token') || '';
-    config.headers['refresh_token'] = sessionStorage.getItem('refresh_token') || '';//ok
+    var access = sessionStorage.getItem('access_token');
+    var refresh = sessionStorage.getItem('refresh_token');
+    if(access != null && access.length > 0){
+        if(refresh != null && refresh.length > 0){
+            config.headers.access_token = access;
+            config.headers['refresh_token'] = refresh;
+        }
+    }
     var formData = new FormData();
     var params = config.data;
     for(var key in params){

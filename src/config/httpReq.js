@@ -6,6 +6,13 @@ const httpReq = {
         }).catch(error=>{
             failure(error);
         });
+    },
+    get(url,params,succeed,failure){
+        service.get(url,{params:params}).then(data =>{
+            succeed(data);
+        }).catch(error=>{
+            failure(error);
+        });
     }
 }
 export default httpReq;
