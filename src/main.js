@@ -5,6 +5,8 @@ import router from './router';
 import store from './store';
 //import './plugins/element.js';//按需导入
 import './assets/css/global.css';
+//[全局]引入阿里的iconfont,当然也可以在App.vue里的<script>import './assets/iconfont/iconfont.css';</script>节点引入,也可以单独的Xxx.vue文件里节点 <script>import './assets/iconfont/iconfont.css';</script>
+import './assets/iconfont/iconfont.css';
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
