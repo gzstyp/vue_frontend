@@ -6,7 +6,8 @@
 </template>
 
 <script>
-
+    //[全局]引入阿里的iconfont
+    import './assets/iconfont/iconfont.css';
 export default {
   name: 'app'
 }
