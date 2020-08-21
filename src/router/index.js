@@ -50,7 +50,7 @@ router.beforeEach((to,from,next)=>{
     // from 是从哪一个url跳转过来的网址
     // next 是一个函数，表示放行,next()表示放行,next('/login') 表示强制跳转到参数内的url
     if (to.path == '/login')return next();
-    var token = window.sessionStorage.getItem('token');
+    var token = window.sessionStorage.getItem('access_token');
     if (!token)return next('/login');
     next();
 });

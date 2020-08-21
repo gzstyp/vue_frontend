@@ -11,7 +11,13 @@ import './assets/iconfont/iconfont.css';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import httpReq from './config/httpReq.js';
+import apis from './config/apis.js';
+
 Vue.config.productionTip = false;
+
+Vue.prototype.apis = apis;
+Vue.prototype.httpReq = httpReq;
 
 Vue.use(ElementUI);
 

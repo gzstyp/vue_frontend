@@ -48,7 +48,7 @@ export default {
     data(){
         return {
             aside : true,
-            loginUser : 'admin',
+            loginUser : sessionStorage.getItem('userName') || '未登录',
             listMenu : [
                 {
                     kid : '0000000000640033000000000ea4c107',

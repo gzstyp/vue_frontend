@@ -6,7 +6,7 @@
             </div>
             <el-form :model="loginForm" label-width="80px" class="login_form">
                 <el-form-item label="登录账号">
-                    <el-input v-model="loginForm.userName" placeholder="输入登录账号|用户名"/>
+                    <el-input v-model="loginForm.username" placeholder="输入登录账号|用户名"/>
                 </el-form-item>
                 <el-form-item label="登录密码">
                     <el-input type="password" v-model="loginForm.password" placeholder="输入登录密码" />
@@ -25,7 +25,7 @@ export default {
     data(){
 		return{
 			loginForm : {
-				userName : '',
+                username : '',
 				password : ''
 			},
 			rules: {
@@ -38,13 +38,34 @@ export default {
 	},
     methods : {
         login : function (){
-            this.$store.commit('clearMenu');//防止二次登录
-            this.$message.success('登录成功');
-            window.sessionStorage.setItem('token','102420485120');
-            this.$router.push({path : '/home'});//采用的是编程式导航,进行页面跳转
+            var _username = this.loginForm.username;
+            var _password = this.loginForm.password;
+            if(_username == null || _username.trim().length <=0){
+                this.$message.error('请输入登录账号!');
+                return;
+            }
+            if(_password == null || _password.trim().length <=0){
+                this.$message.error('请输入登录密码!');
+                return;
+            }
+            this.httpReq.post(this.apis.user.login,this.loginForm,(data) =>{
+                if(data.code === 200){
+                    this.$store.commit('clearMenu');//防止二次登录
+                    this.$message.success('登录成0功');
+                    sessionStorage.setItem('access_token',data.data.accessToken);
+                    sessionStorage.setItem('refresh_token',data.data.refreshToken);
+                    sessionStorage.setItem('userName',data.data.userName);
+                    this.$router.push({path : '/home'});//采用的是编程式导航,进行页面跳转
+                    //console.info(data.data.menuData);
+                }else{
+                    this.$message.warning(data.msg);
+                }
+            },(error) =>{
+                this.$message.error('连接服务器失败');
+            });
         },
         resetData(){
-            this.loginForm.userName = '';
+            this.loginForm.username = '';
             this.loginForm.password = '';
         }
     }
