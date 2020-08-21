@@ -1,5 +1,7 @@
 <template>
-    <div>数据库列表</div>
+    <div>
+        <i class="iconfont icon-shuju" style="font-size:24px;"></i>
+    </div>
 </template>
 <script>
     export default {
