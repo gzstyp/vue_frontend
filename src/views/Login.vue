@@ -47,7 +47,6 @@ export default {
                 this.loadAjax = false;
                 if(data.code === 200){
                     this.$store.commit('clearMenu');//防止二次登录
-                    this.$message.success('登录成功');
                     sessionStorage.setItem('access_token',data.data.accessToken);
                     sessionStorage.setItem('refresh_token',data.data.refreshToken);
                     sessionStorage.setItem('userName',data.data.userName);
