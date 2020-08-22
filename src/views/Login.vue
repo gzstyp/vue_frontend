@@ -65,15 +65,6 @@ export default {
             this.loginForm.username = '';
             this.loginForm.password = '';
         }
-    },
-    created(){
-        var _this = this;
-        document.onkeydown = function(e) {
-            let key = window.event.keyCode;
-            if (key === 13) {
-                _this.login();
-            }
-        };
     }
 }
 </script>
