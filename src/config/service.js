@@ -1,7 +1,7 @@
 import axios from "axios";
 //创建axios实例,本实例不包含表单里有文件上传功能
 const instance = axios.create({
-    timeout : 10000
+    timeout : 40000
 });
 
 //请求拦截器,好使!!!但需要后端要支持才行
@@ -28,7 +28,7 @@ instance.interceptors.request.use(function(config){
     config.data = formData;
     return config;
 },error => {
-    console.info(error);
+    return Promise.reject(error);
 });
 
 //响应拦截器,在实际应用中可以,好使!!!
@@ -47,7 +47,7 @@ instance.interceptors.response.use((data) =>{
     }
     return data.data;
 },error => {
-    console.info(error);
+    return Promise.reject(error);
 });
 
 export default instance;//导出，方便其他调用!!!
