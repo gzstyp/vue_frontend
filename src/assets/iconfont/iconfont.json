@@ -1,0 +1,107 @@
+{
+  "id": "2020323",
+  "name": "frondend",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "924435",
+      "name": "loading",
+      "font_class": "loading",
+      "unicode": "e8fd",
+      "unicode_decimal": 59645
+    },
+    {
+      "icon_id": "991655",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "1160781",
+      "name": "load-d",
+      "font_class": "loadd",
+      "unicode": "e81d",
+      "unicode_decimal": 59421
+    },
+    {
+      "icon_id": "1315275",
+      "name": "Loading",
+      "font_class": "91jiazai",
+      "unicode": "e6a0",
+      "unicode_decimal": 59040
+    },
+    {
+      "icon_id": "1789126",
+      "name": "数据",
+      "font_class": "shuju",
+      "unicode": "e6ab",
+      "unicode_decimal": 59051
+    },
+    {
+      "icon_id": "2152145",
+      "name": "刷新",
+      "font_class": "shuaxin",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "5964565",
+      "name": "编辑",
+      "font_class": "bianji",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "7546331",
+      "name": "树型",
+      "font_class": "shuliebiao",
+      "unicode": "e7a9",
+      "unicode_decimal": 59305
+    },
+    {
+      "icon_id": "8081356",
+      "name": "删除",
+      "font_class": "iconfront-",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "10936714",
+      "name": "节点",
+      "font_class": "jiedian",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "11494971",
+      "name": "编辑",
+      "font_class": "bianji1",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
+      "icon_id": "13638731",
+      "name": "刷新",
+      "font_class": "shuaxin1",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "14341994",
+      "name": "node-tree",
+      "font_class": "node-tree",
+      "unicode": "e7c1",
+      "unicode_decimal": 59329
+    },
+    {
+      "icon_id": "15696570",
+      "name": "系统管理",
+      "font_class": "xitongguanli",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    }
+  ]
+}
