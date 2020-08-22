@@ -8,26 +8,24 @@
         text-color="#000"
         active-text-color="#409eff">
         <template v-for="item in listMenu">
-
-            <template v-if="item.children">
+            <template v-if="item.children.length > 0">
                 <el-submenu :index="''+item.kid">
                     <template slot="title">
-                        <i :class="item.icon" style="font-size:20px"></i>
+                        <i :class="item.iconStyle" style="font-size:20px"></i>
                         <span>{{item.name}}</span>
                     </template>
                     <template v-for="subItem in item.children">
 
-                        <template v-if="subItem.children">
-
+                        <template v-if="subItem.children.length > 0">=
                             <el-submenu :index="''+subItem.kid">
 
                                 <template slot="title">
-                                    <i :class="subItem.icon" style="font-size:20px"></i>
+                                    <i :class="subItem.iconStyle" style="font-size:20px"></i>
                                     <span>{{subItem.name}}</span>
                                 </template>
                                 <template v-for="subIt in subItem.children">
 
-                                    <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus('/'+subIt.url,subIt.name)" v-if="subIt.hidden">
+                                    <el-menu-item :index="'/'+subIt.url" @click="saveNavStatus('/'+subIt.url,subIt.name)">
                                         <template slot="title">
                                             <span>{{subIt.name}}</span>
                                         </template>
@@ -38,9 +36,8 @@
                             </el-submenu>
 
                         </template>
-                        <template v-if="!subItem.children">
-
-                            <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus('/'+subItem.url,subItem.name)" v-if="subItem.hidden">
+                        <template v-if="subItem.children.length === 0">
+                            <el-menu-item :index="'/'+subItem.url" @click="saveNavStatus('/'+subItem.url,subItem.name)">
                                 <template slot="title">
                                     <span>{{subItem.name}}</span>
                                 </template>
@@ -51,8 +48,8 @@
                     </template>
                 </el-submenu>
             </template>
-            <template v-if="!item.children">
-                <el-menu-item :index="'/'+item.url" @click="saveNavStatus('/'+item.url,item.name)" v-if="item.hidden">
+            <template v-if="item.children.length === 0">
+                <el-menu-item :index="'/'+item.url" @click="saveNavStatus('/'+item.url,item.name)">
                     <template slot="title">
                         <span>{{item.name}}</span>
                     </template>

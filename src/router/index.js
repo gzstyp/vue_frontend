@@ -2,35 +2,20 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Login from './../views/Login';
 import Home from './../views/Home';
-import Role from './../views/Role';
-import User from './../views/User';
-import Menu from './../views/Menu';
-import Welcome from './../views/Welcome';
 import NotFound from './../views/NotFound';
-
-import ArticleClass from "../views/ArticleClass";
-import ArticleManager from "../views/ArticleManager";
-import Persion from "../views/Persion";
-import Database from "../views/Database";
-import Software from "../views/Software";
 
 Vue.use(VueRouter);
 
-/*所有的路由都静态添加进去,然后动态显示所拥有的菜单*/
+/*所有的路由都静态添加进去,然后动态显示所拥有的菜单,默认是跳转到home,但是使用了redirect所以最终跳转到了welcome,而跳转welcome就直接访问Welcome页面组件*/
 const routes = [
     {path:'/',redirect:'login'},
     {path:'/login',component:Login},
     {path:'/home',component:Home,redirect:'/welcome',children:[
-        {path:'/welcome',component:Welcome},
-        {path:'/role',component:Role},
-        {path:'/dict',component:() => import('../views/Dict')},
-        {path:'/user',component:User},
-        {path:'/menu',component:Menu},
-        {path:'/articleClass',component:ArticleClass},
-        {path:'/articleManager',component:ArticleManager},
-        {path:'/database',component:Database},
-        {path:'/software',component:Software},
-        {path:'/persion',component:Persion}
+        {path:'/welcome',component:() => import('../views/Welcome')},
+        {path:'/role',component:() => import('../views/Role')},
+        {path:'/user',component:() => import('../views/User')},
+        {path:'/menu',component:() => import('../views/Menu')},
+        {path:'/persion',component:() => import('../views/Persion')}
     ]},
     {path:'*',component: NotFound}
 ]

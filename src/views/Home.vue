@@ -49,89 +49,7 @@ export default {
         return {
             aside : true,
             loginUser : sessionStorage.getItem('userName') || '未登录',
-            listMenu : [
-                {
-                    kid : '0000000000640033000000000ea4c107',
-                    name : '系统管理',
-                    icon : 'el-icon-setting',
-                    hidden : true,
-                    url : null,
-                    children : [
-                        {
-                            kid : '00000000456de029ffffffffc68a479c',
-                            name : '系统菜单',
-                            hidden : true,
-                            url : 'menu'
-                        },
-                        {
-                            kid : '0000000007c4dd77ffffffffe68454c6',
-                            name : '系统账号',
-                            hidden : true,
-                            url : 'user'
-                        },
-                        {
-                            kid : '0000000004dfa8b9000000002f4e715c',
-                            name : '角色权限',
-                            hidden : true,
-                            url : 'role'
-                        },
-                        {
-                            kid : '1110000004dfa8b9000000002f4e1111',
-                            name : '数据字典',
-                            hidden : true,
-                            url : 'dict'
-                        }
-                    ]
-                },
-                {
-                    kid : '00000000454d3232ffffffffd0b0c4dd',
-                    name : '数据维护',
-                    hidden : true,
-                    url : null,
-                    icon : 'el-icon-help',
-                    children : [
-                        {
-                            kid : '0000000043a8763d000000001f8b393f',
-                            name : '文章分类',
-                            hidden : true,
-                            url : 'articleClass'
-                        },
-                        {
-                            kid : '000000003bb712cd00000000022090e8',
-                            name : '文章管理',
-                            hidden : true,
-                            url : 'articleManager'
-                        },
-                        {
-                            kid : '00000000338a27a7ffffffff905a8f9e',
-                            name : '水西天香',
-                            hidden : true,
-                            url : null,
-                            icon : 'el-icon-set-up',
-                            children : [
-                                {
-                                    kid : 'ffffffff95beb47dffffffffad7e6abe',
-                                    name : '数据库',
-                                    hidden : true,
-                                    url : 'database'
-                                },
-                                {
-                                    kid : 'ffffffffbd471a55ffffffff976c6d1b',
-                                    name : '软件版本',
-                                    hidden : true,
-                                    url : 'software'
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    kid : '11ffffffbd471a55ffffffff976c6d11',
-                    name : '个人信息',
-                    hidden : true,
-                    url : 'persion'
-                }
-            ]
+            listMenu : []
         }
     },
     methods : {
@@ -152,6 +70,11 @@ export default {
     },
     beforeCreate(){
         this.$router.push({path:'/welcome'});//刷新默认加载首页|欢迎页
+    },
+    created(){
+        var menuData = sessionStorage.getItem('menuData');
+        //this.listMenu = eval('('+ menuData +')');
+        this.listMenu = eval("(0," + menuData + ")");//兼容IE8的写法,推荐
     }
 }
 </script>
