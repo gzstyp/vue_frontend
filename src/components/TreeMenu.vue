@@ -16,7 +16,7 @@
                     </template>
                     <template v-for="subItem in item.children">
 
-                        <template v-if="subItem.children.length > 0">=
+                        <template v-if="subItem.children.length > 0">
                             <el-submenu :index="''+subItem.kid">
 
                                 <template slot="title">
