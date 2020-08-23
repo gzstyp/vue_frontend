@@ -27,8 +27,8 @@
             ...mapMutations({
                 close : 'closeTab'//即相当于 this.$store.commit('closeTab',tag);其closeTab指定Vuex方法名及传参数!!!
             }),
-            handleClose(tag){
-                this.close(tag);//调用的是上面的 close : 'closeTab' 的属性，tag 是参数!!!
+            handleClose(item){
+                this.close(item);//调用的是上面的 close : 'closeTab' 的属性，tag 是参数!!!
             },
             /*点击标签时跳转页面,采用自定义的name来进行页面跳转*/
             changeMenu(item){
