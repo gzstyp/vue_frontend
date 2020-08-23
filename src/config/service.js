@@ -6,12 +6,12 @@ const instance = axios.create({
 
 //请求拦截器,好使!!!但需要后端要支持才行
 instance.interceptors.request.use(function(config){
-    var access = sessionStorage.getItem('access_token');
-    var refresh = sessionStorage.getItem('refresh_token');
+    var access = sessionStorage.getItem('accessToken');
+    var refresh = sessionStorage.getItem('refreshToken');
     if(access != null && access.length > 0){
         if(refresh != null && refresh.length > 0){
-            config.headers.access_token = access;
-            config.headers['refresh_token'] = refresh;
+            config.headers.accessToken = access;
+            config.headers['refreshToken'] = refresh;
         }
     }
     var formData = new FormData();

@@ -14,7 +14,9 @@ const httpReq = {
             }else{
                 console.info('找不到服务器');
             }
-            failure(error);
+            if(failure){
+                failure(error);
+            }
         });
     },
     get(url,params,succeed,failure){
@@ -31,7 +33,9 @@ const httpReq = {
             }else{
                 console.info('找不到服务器');
             }
-            failure(error);
+            if(failure){
+                failure(error);
+            }
         });
     }
 }

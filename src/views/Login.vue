@@ -47,8 +47,8 @@ export default {
                 this.loadAjax = false;
                 if(data.code === 200){
                     this.$store.commit('clearMenu');//防止二次登录
-                    sessionStorage.setItem('access_token',data.data.accessToken);
-                    sessionStorage.setItem('refresh_token',data.data.refreshToken);
+                    sessionStorage.setItem('accessToken',data.data.accessToken);
+                    sessionStorage.setItem('refreshToken',data.data.refreshToken);
                     sessionStorage.setItem('userName',data.data.userName);
                     sessionStorage.setItem('menuData',data.data.menuData);
                     this.$router.push({path : '/home'});//采用的是编程式导航,进行页面跳转

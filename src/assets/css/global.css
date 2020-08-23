@@ -30,3 +30,33 @@ li.el-submenu .el-menu-item{
     margin-left:2px;
 }
 /*按钮样式结束*/
+
+/* element-ui中dialog居中 */
+.el-dialog{
+    display: flex;
+    flex-direction: column;
+    margin:0 !important;
+    position:absolute;
+    border-radius:4px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    max-height:calc(100% - 30px);
+    max-width:calc(100% - 30px);
+}
+.el-dialog .el-dialog__body{
+    flex:1;
+    overflow: auto;
+}
+/*表格内的样式  padding: 6px 0; 较为好看*/
+.el-table td, .el-table th{
+    padding:6px 0;
+}
+/*暂无数据的样式*/
+.el-table__empty-block {min-height:41px;}
+.el-table__empty-text{line-height: 41px;width: 50%;color: #909399;}
+/*解决复选框有点点的问题*/
+.el-table-column--selection .cell{padding-right:10px;}
+.el-textarea__inner{
+    padding:4px;
+}
