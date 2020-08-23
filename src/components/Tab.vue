@@ -29,6 +29,10 @@
             }),
             handleClose(item){
                 this.close(item);//调用的是上面的 close : 'closeTab' 的属性，tag 是参数!!!
+                const tabs = this.$store.state.tab.tabsList;
+                const len = tabs.length;
+                var url = tabs[len-1].url;
+                this.$router.push({path:url});//关闭后显示最后一个tab
             },
             /*点击标签时跳转页面,采用自定义的name来进行页面跳转*/
             changeMenu(item){
