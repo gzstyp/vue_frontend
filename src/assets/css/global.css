@@ -60,3 +60,9 @@ li.el-submenu .el-menu-item{
 .el-textarea__inner{
     padding:4px;
 }
+/*弹出框的按钮样式*/
+.el-dialog__footer {
+    padding: 4px 0px 6px;
+    text-align: center;
+    box-sizing: border-box;
+}
