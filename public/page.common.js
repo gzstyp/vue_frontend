@@ -12,7 +12,7 @@ var refreshFlag = true;
     var urlPath = window.document.location.href;
     var pos = urlPath.indexOf(pathName);
     var domain = urlPath.substring(0,pos);
-    urlPrefix = 'http://192.168.3.108:901/';//获取页面是不需要添加的,只是在ajax请求接口时才需要添加,注意个地方IE8++存在跨域问题
+    urlPrefix = 'http://192.168.3.108:701/';//获取页面是不需要添加的,只是在ajax请求接口时才需要添加,注意个地方IE8++存在跨域问题
     var tokenUrl = 'accessToken='+(sessionStorage.getItem('accessToken') || '') + '&refreshToken=' + (sessionStorage.getItem('refreshToken') || '');
     var tokenStart = '?'+tokenUrl;
     var tokenParams = '&'+tokenUrl;

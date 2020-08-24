@@ -16,7 +16,9 @@
                 <el-table :data="listDatas" :empty-text="listEmpty" @selection-change="selectionChange" @row-dblclick="dblclick" border stripe style="margin-top:6px;">
                     <el-table-column type="selection" align="center" width="35"></el-table-column>
                     <el-table-column prop="role_name" label="角色名称" ></el-table-column>
-                    <el-table-column prop="role_flag" label="角色标识" width="280"></el-table-column>
+                    <el-table-column prop="role_flag" label="角色标识"></el-table-column>
+                    <el-table-column prop="utotal" label="分配量" width="114"></el-table-column>
+                    <el-table-column prop="mtotal" label="菜单数" width="114"></el-table-column>
                     <el-table-column width="250" label="操作选项">
                         <template slot-scope="scope">
                             <el-button size="mini" type="primary" @click="handleEdit(scope.$index,scope.row)" v-if="permissions.role_row_edit">编辑</el-button>
@@ -39,12 +41,12 @@
             <el-dialog :title="dialogTitle" :lock-scroll="false" :visible.sync="dialogVisible" width="32%" :before-close="handleClose" :close-on-click-modal="false" :append-to-body="true">
                 <el-form ref="form" label-width="120px">
                     <el-form-item label="角色名称">
-                        <el-input v-model="formData.name" placeholder="角色名称" clearable style="width:90%"></el-input>
+                        <el-input v-model="formData.role_name" placeholder="角色名称" clearable style="width:90%"></el-input>
                     </el-form-item>
                 </el-form>
                 <el-form ref="form" label-width="120px">
                     <el-form-item label="角色标识">
-                        <el-input v-model="formData.url" placeholder="角色标识" clearable style="width:90%"></el-input>
+                        <el-input v-model="formData.role_flag" placeholder="角色标识" clearable style="width:90%"></el-input>
                     </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
@@ -68,8 +70,8 @@
                 dialogTitle :'添加|编辑',
                 formData : {
                     kid : '',
-                    name : '',
-                    url : '',
+                    role_name : '',
+                    role_flag : '',
                 },
                 searchForm : {
                     name : ''
@@ -116,9 +118,8 @@
                 if(row != null && row.kid != null){
                     this.formData = {
                         kid : row.kid,
-                        name : row.name,
-                        url : row.url,
-                        sort : row.sort,
+                        role_name : row.role_name,
+                        role_flag : row.role_flag
                     };
                 }else{
                     this.formData = {};
@@ -130,12 +131,12 @@
                 this.dialogVisible = false;
             },
             checkForm : function(){
-                if(!this.formData.name){
-                    this.$message.error('请填写楼层名称');
+                if(!this.formData.role_name){
+                    this.$message.error('请填写角色名称');
                     return;
                 }
-                if(!this.formData.url){
-                    this.$message.error('请填写路由地址');
+                if(!this.formData.role_flag){
+                    this.$message.error('请填写角色标识');
                     return;
                 }
                 return true;
@@ -157,8 +158,8 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    _this.listDatas.splice(index,1);
-                    this.httpReq.post(this.apis.role.delById,{kid:row.kid},function(data){
+                    //_this.listDatas.splice(index,1);
+                    this.httpReq.post(this.apis.role.delById,{id:row.kid},function(data){
                         _this.resultHandle(data);
                     });
                 }).catch(action => {
