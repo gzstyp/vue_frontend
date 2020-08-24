@@ -24,7 +24,7 @@
                             <el-button size="mini" type="primary" @click="handleEdit(scope.$index,scope.row)" v-if="permissions.role_row_edit">编辑</el-button>
                             <el-button size="mini" type="danger" @click="rowDelete(scope.$index,scope.row)" v-if="permissions.role_row_delById">删除</el-button>
                             <template v-if="options('role_row_delEmptyMenu,role_row_getRoleMenu')">
-                                <el-dropdown size="medium" split-button  style="margin-left:6px">
+                                <el-dropdown size="medium" split-button  style="margin-left:6px;">
                                     其他
                                     <el-dropdown-menu slot="dropdown">
                                         <el-dropdown-item v-if="permissions.role_row_delEmptyMenu" @click.native="rowEmptyMenu(scope.row)">清空菜单</el-dropdown-item>

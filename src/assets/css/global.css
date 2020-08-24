@@ -51,14 +51,14 @@ li.el-submenu .el-menu-item{
 /*表格内的样式(表头)  padding: 6px 0; 较为好看*/
 div table thead tr th{
     padding:6px 0 !important;
-    height:41px !important;
+    height:38px !important;/*数据表格的行的高度*/
 }
 .el-table td, .el-table th{
     padding:0;
 }
 /*数据表格的样式(表体)*/
 div table tbody tr td{
-    height:41px !important;
+    height:38px !important;/*数据表格的行的高度*/
     padding:0;
 }
 /*mini的按钮样式*/
@@ -66,8 +66,8 @@ div table tbody tr td{
     padding: 8px 12px !important;
 }
 /*暂无数据的样式*/
-.el-table__empty-block {min-height:41px;}
-.el-table__empty-text{line-height: 41px;width: 50%;color: #909399;}
+.el-table__empty-block {min-height:38px;}/*数据表格的行的高度*/
+.el-table__empty-text{line-height: 38px;width: 50%;color: #909399;}/*数据表格的行的高度*/
 /*解决复选框有点点的问题*/
 .el-table-column--selection .cell{padding-right:10px;}
 .el-textarea__inner{
