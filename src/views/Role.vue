@@ -17,8 +17,16 @@
                     <el-table-column type="selection" align="center" width="35"></el-table-column>
                     <el-table-column prop="role_name" label="角色名称" ></el-table-column>
                     <el-table-column prop="role_flag" label="角色标识"></el-table-column>
-                    <el-table-column prop="utotal" label="分配量" width="114"></el-table-column>
-                    <el-table-column prop="mtotal" label="菜单数" width="114"></el-table-column>
+                    <el-table-column label="分配量" width="114">
+                        <template slot-scope="scope">
+                            {{(scope.row.utotal) ? scope.row.utotal : '0'}}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="菜单数" width="114">
+                        <template slot-scope="scope">
+                            {{(scope.row.mtotal) ? scope.row.mtotal : '0'}}
+                        </template>
+                    </el-table-column>
                     <el-table-column width="240" label="操作选项">
                         <template slot-scope="scope">
                             <el-button size="mini" type="primary" @click="handleEdit(scope.$index,scope.row)" v-if="permissions.role_row_edit">编辑</el-button>
