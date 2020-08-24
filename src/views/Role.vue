@@ -2,7 +2,7 @@
     <div>
         <el-row>
             <el-col :span="6">
-                <el-input placeholder="请输入内容" v-model="searchForm.name">
+                <el-input placeholder="请输入内容" v-model="searchForm.name" clearable>
                     <el-button slot="append" icon="el-icon-search" @click="search()"></el-button>
                 </el-input>
             </el-col>
