@@ -3,7 +3,7 @@
         <el-row>
             <el-col :span="6">
                 <el-input placeholder="请输入内容" v-model="searchForm.name">
-                    <el-button slot="append" icon="el-icon-search"></el-button>
+                    <el-button slot="append" icon="el-icon-search" @click="search()"></el-button>
                 </el-input>
             </el-col>
             <el-col :span="6">
@@ -211,16 +211,15 @@
                     pageSize : _this.page.size
                 };
                 if(_this.searchForm.name){
-                    params.name = _this.searchForm.name;
+                    params.role_name = _this.searchForm.name;
                 }
                 this.httpReq.get(this.apis.role.listData,params,(data)=>{
                     if(data.code === 200){
                         _this.listDatas = data.data;
                         _this.page.total = data.total;
-                    }else if(data.code === 202){
+                    }else{
                         _this.listDatas = [];
                         _this.page.total = 0;
-                    }else{
                         _this.listEmpty = data.msg;
                     }
                 },(error)=>{
