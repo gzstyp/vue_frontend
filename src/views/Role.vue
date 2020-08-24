@@ -19,10 +19,19 @@
                     <el-table-column prop="role_flag" label="角色标识"></el-table-column>
                     <el-table-column prop="utotal" label="分配量" width="114"></el-table-column>
                     <el-table-column prop="mtotal" label="菜单数" width="114"></el-table-column>
-                    <el-table-column width="250" label="操作选项">
+                    <el-table-column width="240" label="操作选项">
                         <template slot-scope="scope">
                             <el-button size="mini" type="primary" @click="handleEdit(scope.$index,scope.row)" v-if="permissions.role_row_edit">编辑</el-button>
-                            <el-button size="mini" type="danger" @click="handleDelete(scope.$index,scope.row)" v-if="permissions.role_row_delById">删除</el-button>
+                            <el-button size="mini" type="danger" @click="rowDelete(scope.$index,scope.row)" v-if="permissions.role_row_delById">删除</el-button>
+                            <template v-if="options('role_row_delEmptyMenu,role_row_getRoleMenu')">
+                                <el-dropdown size="medium" split-button  style="margin-left:6px">
+                                    其他
+                                    <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item v-if="permissions.role_row_delEmptyMenu" @click.native="rowEmptyMenu(scope.row)">清空菜单</el-dropdown-item>
+                                        <el-dropdown-item v-if="permissions.role_row_getRoleMenu" @click.native="rowRoleMenu(scope.row)">角色菜单</el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
+                            </template>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -94,7 +103,9 @@
                     role_row_edit : false,
                     role_row_saveRoleMenu : false,
                     role_row_delEmptyMenu : false
-                }
+                },
+                ops : true,
+                opts : false
             }
         },
         created() {
@@ -150,7 +161,7 @@
                     this.openDialog(null);
                 }
             },
-            handleDelete : function(index,row){
+            rowDelete : function(index,row){
                 var _this = this;
                 this.$confirm('系统提示',{
                     distinguishCancelAndClose: true,
@@ -168,6 +179,19 @@
                         message : '已取消操作'
                     });
                 });
+            },
+            rowEmptyMenu : function(row){
+                var total = row.mtotal;
+                if(total == null){
+                    layerFn.alert('['+row.role_name+']还没有分配菜单',AppKey.code.code199);
+                    return;
+                }
+                layerFn.confirm('你确定要清空<span style="color:#1e9fff">'+row.role_name+'</span>的菜单操作吗?',function(){
+
+                });
+            },
+            rowRoleMenu : function(row){
+                console.info('rowRoleMenu'+row.kid);
             },
             resultHandle : function(data){
                 if(data.code === 200){
@@ -252,6 +276,24 @@
                         }
                     }
                 }
+            },
+            options : function(opts){
+                if(this.ops){
+                    this.ops = false;
+                    var arrs = opts.split(',');
+                    var data = this.permissions;
+                    var _this = this;
+                    for(const index in arrs){
+                        var k = arrs[index];
+                        for(const key in data){
+                            if(data[k]){
+                                _this.opts = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                return this.opts;
             },
             changeSize : function (pageSize){
                 this.page.current = 1;

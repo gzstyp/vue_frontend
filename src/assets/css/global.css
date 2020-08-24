@@ -93,3 +93,12 @@ div table tbody tr td{
 .el-message-box{
     padding-bottom:4px;
 }
+.el-table .cell, .el-table--border td:first-child .cell, .el-table--border th:first-child .cell{
+    padding-right:4px;
+}
+.el-table .cell{
+    padding-left:4px;
+}
+div.cell{
+    padding:0 4px !important;
+}
