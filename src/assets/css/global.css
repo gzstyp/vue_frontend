@@ -79,3 +79,8 @@ div table tbody tr td{
     text-align: center;
     box-sizing: border-box;
 }
+/*layui弹出层底部的按钮样式*/
+.layui-layer-btn a{
+    padding:0 10px 0;
+    font-size:13px;
+}
