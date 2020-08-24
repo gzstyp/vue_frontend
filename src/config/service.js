@@ -1,9 +1,10 @@
 import axios from "axios";
+import AppKey from './app.base.js';
 //创建axios实例,本实例不包含表单里有文件上传功能
 const instance = axios.create({
     timeout : 40000
 });
-
+var refreshFlag = true;
 //请求拦截器,好使!!!但需要后端要支持才行
 instance.interceptors.request.use(function(config){
     var access = sessionStorage.getItem('accessToken');
@@ -35,19 +36,34 @@ instance.interceptors.request.use(function(config){
 instance.interceptors.response.use((data) =>{
     var _data = data.data;
     if(_data.code === 200){
-        var renewal = data.renewal;//注意该更新token标识
+        var renewal = _data.renewal;//注意该更新token标识
         if(renewal){
-            //更新令牌
-            instance.get('http://api.fwtai.com/dataView/getFloorArea', {params: {}}).then(data =>{
-                console.info('更新令牌成功');
-            }).catch(error=>{
-                console.info('更新令牌失败');
-            });
+            if(refreshFlag){
+                refreshFlag = false;
+                renewalToken();
+            }
         }
     }
     return data.data;
 },error => {
     return Promise.reject(error);
 });
+
+function renewalToken(){
+    var params = {'accessToken': (sessionStorage.getItem('accessToken') || '')};
+    instance.post(AppKey.baseApi + 'user/renewalToken',params).then((data)=>{
+        setTimeout(function(){
+            refreshFlag = true;
+        },120000);//2分钟后又可以刷新,防止重复刷新
+        if(data.code === AppKey.code.code200){
+            var token = data.data;
+            sessionStorage.setItem("accessToken",token.accessToken);
+            sessionStorage.setItem("refreshToken",token.refreshToken);
+        }else if(data.code === AppKey.code.code205){
+            console.info('提示登录并跳转到登录页面');
+            return;
+        }
+    });
+}
 
 export default instance;//导出，方便其他调用!!!
