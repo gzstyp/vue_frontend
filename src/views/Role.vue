@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-cloak>
         <div v-if="permissions.role_btn_listData">
             <el-row>
                 <el-col :span="4" v-if="permissions.role_btn_listData">
@@ -67,19 +67,19 @@
                     </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="submits()">提交</el-button>
-            <el-button @click="dialogVisible = false">取消</el-button>
-        </span>
+                    <el-button type="primary" @click="submits()">提交</el-button>
+                    <el-button @click="dialogVisible = false">取消</el-button>
+                </span>
             </el-dialog>
         </div>
-        <div v-if="!permissions.role_btn_listData">
-            无权限操作
-        </div>
+        <div v-if="!permissions.role_btn_listData"></div>
     </div>
 </template>
 
 <script>
+    import BlankPage from "../components/BlankPage";
     export default {
+        components : {BlankPage},
         name: "Role",
         data : function(){
             return {
@@ -317,5 +317,4 @@
 </script>
 
 <style scoped>
-
 </style>

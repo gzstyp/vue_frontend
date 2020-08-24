@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-cloak>
         <el-card shadow="never">
             <el-row :gutter="5">
                 <el-col :span="6">

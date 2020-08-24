@@ -1,5 +1,5 @@
 <template>
-    <el-container class="home-container">
+    <el-container class="home-container" v-cloak>
         <el-header>
             <div>
                 <img src="../assets/logo.jpg" alt="logo">

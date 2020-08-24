@@ -1,5 +1,5 @@
 <template>
-    <el-row class="home">
+    <el-row class="home" v-cloak>
         <el-col :span="8">
             <el-card shadow="hover" style="height:290px">
                 <div class="user">

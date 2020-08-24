@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-cloak>
         菜单页面
     </div>
 </template>
