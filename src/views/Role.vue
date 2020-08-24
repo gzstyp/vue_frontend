@@ -56,14 +56,14 @@
                 </el-pagination>
             </el-row>
             <el-dialog :title="dialogTitle" :lock-scroll="false" :visible.sync="dialogVisible" width="32%" :before-close="handleClose" :close-on-click-modal="false" :append-to-body="true">
-                <el-form ref="form" label-width="120px">
+                <el-form ref="form" label-width="20%">
                     <el-form-item label="角色名称">
-                        <el-input v-model="formData.role_name" placeholder="角色名称" clearable style="width:90%"></el-input>
+                        <el-input v-model="formData.role_name" placeholder="角色名称" clearable style="width:85%"></el-input>
                     </el-form-item>
                 </el-form>
-                <el-form ref="form" label-width="120px">
+                <el-form ref="form" label-width="20%">
                     <el-form-item label="角色标识">
-                        <el-input v-model="formData.role_flag" placeholder="角色标识" clearable style="width:90%"></el-input>
+                        <el-input v-model="formData.role_flag" placeholder="角色标识" clearable style="width:85%"></el-input>
                     </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
