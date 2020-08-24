@@ -1,61 +1,61 @@
 <template>
     <div>
-        <el-row>
-            <el-col :span="6">
-                <el-input placeholder="请输入内容" v-model="searchForm.name" clearable>
-                    <el-button slot="append" icon="el-icon-search" @click="search()" title="搜索"></el-button>
-                </el-input>
-            </el-col>
-            <el-col :span="6">
-                <el-button type="primary" @click="handleEdit()" icon="el-icon-plus">添加</el-button>
-                <el-button :disabled="kids.length > 0 ? false:true" type="danger" @click="delByKeys()" icon="el-icon-delete">删除</el-button>
-            </el-col>
-        </el-row>
-        <el-row>
-            <el-table :data="listDatas" :empty-text="listEmpty" @selection-change="selectionChange" @row-dblclick="dblclick" border stripe style="margin-top:6px;">
-                <el-table-column type="selection" align="center" width="35"></el-table-column>
-                <el-table-column prop="role_name" label="楼层名称" ></el-table-column>
-                <el-table-column prop="role_flag" label="路由地址" width="280"></el-table-column>
-                <el-table-column width="250" label="操作">
-                    <template slot-scope="scope">
-                        <el-button size="mini" type="primary" @click="handleEdit(scope.$index,scope.row)">编辑</el-button>
-                        <el-button size="mini" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-            <el-pagination
-                v-if="page.size<page.total"
-                background
-                layout="total,sizes,prev,pager,next,jumper"
-                @size-change="changeSize"
-                @current-change="currentChange"
-                :page-size="page.size"
-                :page-sizes="page.sizes"
-                :current-page="page.current"
-                :total="page.total">
-            </el-pagination>
-        </el-row>
-        <el-dialog :title="dialogTitle" :lock-scroll="false" :visible.sync="dialogVisible" width="32%" :before-close="handleClose" :close-on-click-modal="false" :append-to-body="true">
-            <el-form ref="form" label-width="120px">
-                <el-form-item label="楼层名称">
-                    <el-input v-model="formData.name" placeholder="楼层名称" clearable style="width:90%"></el-input>
-                </el-form-item>
-            </el-form>
-            <el-form ref="form" label-width="120px">
-                <el-form-item label="路由地址">
-                    <el-input v-model="formData.url" placeholder="路由地址" clearable style="width:90%"></el-input>
-                </el-form-item>
-            </el-form>
-            <el-form ref="form" label-width="120px">
-                <el-form-item label="楼层排序">
-                    <el-input v-model="formData.sort" placeholder="楼层排序" clearable style="width:90%" oninput="value=value.replace(/[^\d]/g,'')"></el-input>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
+        <div v-if="permissions.role_btn_listData">
+            <el-row>
+                <el-col :span="4" v-if="permissions.role_btn_listData">
+                    <el-input placeholder="输入关键字" v-model="searchForm.name" clearable>
+                        <el-button slot="append" icon="el-icon-search" @click="search()" title="搜索"></el-button>
+                    </el-input>
+                </el-col>
+                <el-col :span="6">
+                    <el-button type="primary" @click="handleEdit()" icon="el-icon-plus" v-if="permissions.role_btn_add">添加</el-button>
+                    <el-button :disabled="kids.length <= 0" type="danger" @click="delByKeys()" icon="el-icon-delete" v-if="permissions.role_btn_delByKeys">删除</el-button>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-table :data="listDatas" :empty-text="listEmpty" @selection-change="selectionChange" @row-dblclick="dblclick" border stripe style="margin-top:6px;">
+                    <el-table-column type="selection" align="center" width="35"></el-table-column>
+                    <el-table-column prop="role_name" label="角色名称" ></el-table-column>
+                    <el-table-column prop="role_flag" label="角色标识" width="280"></el-table-column>
+                    <el-table-column width="250" label="操作选项">
+                        <template slot-scope="scope">
+                            <el-button size="mini" type="primary" @click="handleEdit(scope.$index,scope.row)" v-if="permissions.role_row_edit">编辑</el-button>
+                            <el-button size="mini" type="danger" @click="handleDelete(scope.$index,scope.row)" v-if="permissions.role_row_delById">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <el-pagination
+                    v-if="page.size<page.total"
+                    background
+                    layout="total,sizes,prev,pager,next,jumper"
+                    @size-change="changeSize"
+                    @current-change="currentChange"
+                    :page-size="page.size"
+                    :page-sizes="page.sizes"
+                    :current-page="page.current"
+                    :total="page.total">
+                </el-pagination>
+            </el-row>
+            <el-dialog :title="dialogTitle" :lock-scroll="false" :visible.sync="dialogVisible" width="32%" :before-close="handleClose" :close-on-click-modal="false" :append-to-body="true">
+                <el-form ref="form" label-width="120px">
+                    <el-form-item label="角色名称">
+                        <el-input v-model="formData.name" placeholder="角色名称" clearable style="width:90%"></el-input>
+                    </el-form-item>
+                </el-form>
+                <el-form ref="form" label-width="120px">
+                    <el-form-item label="角色标识">
+                        <el-input v-model="formData.url" placeholder="角色标识" clearable style="width:90%"></el-input>
+                    </el-form-item>
+                </el-form>
+                <span slot="footer" class="dialog-footer">
             <el-button type="primary" @click="submits()">提交</el-button>
             <el-button @click="dialogVisible = false">取消</el-button>
         </span>
-        </el-dialog>
+            </el-dialog>
+        </div>
+        <div v-if="!permissions.role_btn_listData">
+            无权限操作
+        </div>
     </div>
 </template>
 
@@ -65,12 +65,11 @@
         data : function(){
             return {
                 listEmpty:'暂无数据',
-                dialogTitle :'楼层名称',
+                dialogTitle :'添加|编辑',
                 formData : {
                     kid : '',
                     name : '',
                     url : '',
-                    sort : ''
                 },
                 searchForm : {
                     name : ''
@@ -83,7 +82,17 @@
                     sizes: [20,50,99],
                     total: 0
                 },
-                dialogVisible : false
+                dialogVisible : false,
+                permissions : {
+                    role_btn_listData : false,
+                    role_btn_add : false,
+                    role_btn_delByKeys : false,
+                    role_row_getRoleMenu : false,
+                    role_row_delById : false,
+                    role_row_edit : false,
+                    role_row_saveRoleMenu : false,
+                    role_row_delEmptyMenu : false
+                }
             }
         },
         created() {
@@ -133,10 +142,10 @@
             },
             handleEdit : function(index,item){
                 if(item != null && item.kid != null){
-                    this.dialogTitle = '编辑楼层名称';
+                    this.dialogTitle = '编辑角色';
                     this.openDialog(item);
                 }else{
-                    this.dialogTitle = '添加楼层名称';
+                    this.dialogTitle = '添加角色';
                     this.openDialog(null);
                 }
             },
@@ -219,6 +228,7 @@
                     if(data.code === 200){
                         _this.listDatas = data.data;
                         _this.page.total = data.total;
+                        _this.controlShow(data.permissions)
                     }else{
                         _this.listDatas = [];
                         _this.page.total = 0;
@@ -229,6 +239,18 @@
                     _this.listDatas = [];
                     _this.listEmpty = '连接服务器失败';
                 });
+            },
+            controlShow : function(data){
+                var ps = this.permissions;
+                for(var x=0;x<data.length;x++){
+                    var value = data[x];
+                    for(var key in ps){
+                        if(key === value){
+                            ps[key] = true;
+                            break;
+                        }
+                    }
+                }
             },
             changeSize : function (pageSize){
                 this.page.current = 1;

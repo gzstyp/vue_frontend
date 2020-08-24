@@ -75,7 +75,7 @@ div table tbody tr td{
 }
 /*弹出框的按钮样式*/
 .el-dialog__footer {
-    padding: 4px 0 6px;
+    padding: 4px 0;
     text-align: center;
     box-sizing: border-box;
 }
@@ -83,4 +83,13 @@ div table tbody tr td{
 .layui-layer-btn a{
     padding:0 10px 0;
     font-size:13px;
+}
+/*element-ui中确认框的按钮样式*/
+.el-message-box__btns{
+    padding:5px 2px 0;
+    text-align:center;
+}
+/*element-ui中确认框的底部样式*/
+.el-message-box{
+    padding-bottom:4px;
 }
