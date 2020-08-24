@@ -213,7 +213,9 @@
                 if(_this.searchForm.name){
                     params.role_name = _this.searchForm.name;
                 }
+                self.layerIndex = layerFn.loading('正在处理……');
                 this.httpReq.get(this.apis.role.listData,params,(data)=>{
+                    layerFn.closeIndex(self.layerIndex);
                     if(data.code === 200){
                         _this.listDatas = data.data;
                         _this.page.total = data.total;
@@ -223,6 +225,7 @@
                         _this.listEmpty = data.msg;
                     }
                 },(error)=>{
+                    layerFn.closeIndex(self.layerIndex);
                     _this.listDatas = [];
                     _this.listEmpty = '连接服务器失败';
                 });
