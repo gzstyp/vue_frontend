@@ -49,9 +49,24 @@ li.el-submenu .el-menu-item{
     overflow: auto;
 }
 /*表格内的样式  padding: 6px 0; 较为好看*/
-.el-table td, .el-table th{
-    padding:6px 0;
+div table thead tr th{
+    padding:6px 0 !important;
+    height:41px !important;
+    color:#09aaff !important;
 }
+.el-table td, .el-table th{
+    padding:0;
+}
+/*数据表格的样式*/
+div table tbody tr td{
+    height:41px !important;
+    padding: 0px 0;
+    color:#09aaff !important;
+}
+.el-button--mini{
+    padding: 8px 12px !important;
+}
+
 /*暂无数据的样式*/
 .el-table__empty-block {min-height:41px;}
 .el-table__empty-text{line-height: 41px;width: 50%;color: #909399;}
