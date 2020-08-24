@@ -224,7 +224,7 @@
                     }
                 },(error)=>{
                     _this.listDatas = [];
-                    _this.listEmpty = '系统出现错误';
+                    _this.listEmpty = '连接服务器失败';
                 });
             },
             changeSize : function (pageSize){

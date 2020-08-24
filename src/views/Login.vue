@@ -13,7 +13,8 @@
                 </el-form-item>
             </el-form>
             <el-row type="flex" justify="center" class="btns">
-                <el-button type="primary" @click="login()" :loading="loadAjax">登录认证</el-button>
+                <el-button type="primary" @click="login()">登录认证</el-button>
+                <el-button type="danger" @click="resetData()">取消重置</el-button>
             </el-row>
         </div>
     </div>
@@ -26,8 +27,7 @@ export default {
 			loginForm : {
                 username : '',
 				password : ''
-			},
-            loadAjax : false
+			}
 		}
 	},
     methods : {
@@ -42,9 +42,9 @@ export default {
                 this.$message.error('请输入登录密码!');
                 return;
             }
-            this.loadAjax = true;
+            self.layerIndex = layerFn.loading('登录认证……');
             this.httpReq.post(this.apis.user.login,this.loginForm,(data) =>{
-                this.loadAjax = false;
+                layerFn.closeIndex(self.layerIndex);
                 if(data.code === 200){
                     this.$store.commit('clearMenu');//防止二次登录
                     sessionStorage.setItem('accessToken',data.data.accessToken);
@@ -56,7 +56,7 @@ export default {
                     this.$message.warning(data.msg);
                 }
             },(error) =>{
-                this.loadAjax = false;
+                layerFn.closeIndex(self.layerIndex);
                 this.$message.error('连接服务器失败');
             });
         },

@@ -1,5 +1,4 @@
 import axios from "axios";
-import AppKey from './app.base.js';
 //创建axios实例,本实例不包含表单里有文件上传功能
 const instance = axios.create({
     timeout : 40000
@@ -51,7 +50,7 @@ instance.interceptors.response.use((data) =>{
 
 function renewalToken(){
     var params = {'accessToken': (sessionStorage.getItem('accessToken') || '')};
-    instance.post(AppKey.baseApi + 'user/renewalToken',params).then((data)=>{
+    instance.post(urlPrefix + 'user/renewalToken',params).then((data)=>{
         setTimeout(function(){
             refreshFlag = true;
         },120000);//2分钟后又可以刷新,防止重复刷新
@@ -60,8 +59,9 @@ function renewalToken(){
             sessionStorage.setItem("accessToken",token.accessToken);
             sessionStorage.setItem("refreshToken",token.refreshToken);
         }else if(data.code === AppKey.code.code205){
-            console.info('提示登录并跳转到登录页面');
-            return;
+            layerFn.tokenLogin();
+        }else{
+            layerFn.alert(data.msg,data.code);
         }
     });
 }

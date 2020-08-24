@@ -1,15 +1,14 @@
-import appBase from './app.base.js';
 const api = {
     user : {
-        add : appBase.baseApi + 'user/add',
-        edit : appBase.baseApi + 'user/edit',
-        login : appBase.baseApi + 'login'
+        add : urlPrefix + 'user/add',
+        edit : urlPrefix + 'user/edit',
+        login : urlPrefix + 'login'
     },
     role : {
-        add : appBase.baseApi + 'role/add',
-        edit : appBase.baseApi + 'role/edit',
-        listData : appBase.baseApi + 'role/listData',
-        delById : appBase.baseApi + 'role/delById'
+        add : urlPrefix + 'role/add',
+        edit : urlPrefix + 'role/edit',
+        listData : urlPrefix + 'role/listData',
+        delById : urlPrefix + 'role/delById'
     }
 }
 export default api;
