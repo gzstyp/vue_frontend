@@ -15,7 +15,7 @@
             <el-row>
                 <el-table :data="listDatas" :empty-text="listEmpty" @selection-change="selectionChange" @row-dblclick="dblclick" border stripe style="margin-top:6px;">
                     <el-table-column type="selection" align="center" width="35"></el-table-column>
-                    <el-table-column prop="role_name" label="角色名称" ></el-table-column>
+                    <el-table-column prop="role_name" label="角色名称"></el-table-column>
                     <el-table-column prop="role_flag" label="角色标识"></el-table-column>
                     <el-table-column label="分配量" width="114">
                         <template slot-scope="scope">
