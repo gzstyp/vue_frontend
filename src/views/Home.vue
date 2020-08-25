@@ -7,8 +7,10 @@
                 <i @click="showHide()" style="font-size: 24px;cursor: pointer;" title="隐藏|显示导航" :class="aside ? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i>
             </div>
             <div>
-                <el-dropdown size="medium" split-button>
-                    {{loginUser}}
+                <el-dropdown>
+                    <span class="el-dropdown-link" style="color:#fff;cursor:pointer;margin-right:8px;font-size:14px;">
+                        {{loginUser}}<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item icon="el-icon-plus" @click.native="dropdownOpts('/persion','个人信息')">个人信息</el-dropdown-item>
                         <el-dropdown-item icon="el-icon-circle-plus">修改密码</el-dropdown-item>

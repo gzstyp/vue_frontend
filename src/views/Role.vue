@@ -27,13 +27,13 @@
                             {{(scope.row.mtotal) ? scope.row.mtotal : '0'}}
                         </template>
                     </el-table-column>
-                    <el-table-column width="240" label="操作选项">
+                    <el-table-column :width="options('role_row_delEmptyMenu,role_row_getRoleMenu') ? 240 : 130" label="操作选项" v-if="operation('role_row_edit,role_row_delById,role_row_delEmptyMenu,role_row_getRoleMenu')">
                         <template slot-scope="scope">
                             <el-button size="mini" type="primary" @click="handleEdit(scope.$index,scope.row)" v-if="permissions.role_row_edit">编辑</el-button>
                             <el-button size="mini" type="danger" @click="rowDelete(scope.$index,scope.row)" v-if="permissions.role_row_delById">删除</el-button>
                             <template v-if="options('role_row_delEmptyMenu,role_row_getRoleMenu')">
                                 <el-dropdown size="medium" split-button  style="margin-left:6px;">
-                                    其他
+                                    操作
                                     <el-dropdown-menu slot="dropdown">
                                         <el-dropdown-item v-if="permissions.role_row_delEmptyMenu" @click.native="rowEmptyMenu(scope.row)">清空菜单</el-dropdown-item>
                                         <el-dropdown-item v-if="permissions.role_row_getRoleMenu" @click.native="rowRoleMenu(scope.row)">角色菜单</el-dropdown-item>
@@ -112,8 +112,10 @@
                     role_row_saveRoleMenu : false,
                     role_row_delEmptyMenu : false
                 },
-                ops : true,
-                opts : false
+                ops : true,/*下拉操作*/
+                opts : false,/*下拉操作是否已执行标识*/
+                opn : true,/*操作选项*/
+                operate : false/*操作选项是否已执行标识*/
             }
         },
         created() {
@@ -273,6 +275,7 @@
                     _this.listEmpty = '连接服务器失败';
                 });
             },
+            /*控制按钮是否显示*/
             controlShow : function(data){
                 var ps = this.permissions;
                 for(var x=0;x<data.length;x++){
@@ -285,6 +288,26 @@
                     }
                 }
             },
+            /*操作选项*/
+            operation : function(opts){
+                if(this.opn){
+                    this.opn = false;
+                    var arrs = opts.split(',');
+                    var data = this.permissions;
+                    var _this = this;
+                    for(const index in arrs){
+                        var k = arrs[index];
+                        for(const key in data){
+                            if(data[k]){
+                                _this.operate = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                return this.operate;
+            },
+            /*下拉操作*/
             options : function(opts){
                 if(this.ops){
                     this.ops = false;
