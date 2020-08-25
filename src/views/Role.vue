@@ -79,9 +79,7 @@
 </template>
 
 <script>
-    import BlankPage from "../components/BlankPage";
     export default {
-        components : {BlankPage},
         name: "Role",
         data : function(){
             return {
