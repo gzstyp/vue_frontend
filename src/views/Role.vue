@@ -27,13 +27,15 @@
                             {{(scope.row.mtotal) ? scope.row.mtotal : '0'}}
                         </template>
                     </el-table-column>
-                    <el-table-column :width="options('role_row_delEmptyMenu,role_row_getRoleMenu') ? 240 : 130" label="操作选项" v-if="operation('role_row_edit,role_row_delById,role_row_delEmptyMenu,role_row_getRoleMenu')">
+                    <el-table-column :width="options('role_row_delEmptyMenu,role_row_getRoleMenu') ? 200 : 130" label="操作选项" v-if="operation('role_row_edit,role_row_delById,role_row_delEmptyMenu,role_row_getRoleMenu')">
                         <template slot-scope="scope">
                             <el-button size="mini" type="primary" @click="handleEdit(scope.$index,scope.row)" v-if="permissions.role_row_edit">编辑</el-button>
                             <el-button size="mini" type="danger" @click="rowDelete(scope.$index,scope.row)" v-if="permissions.role_row_delById">删除</el-button>
                             <template v-if="options('role_row_delEmptyMenu,role_row_getRoleMenu')">
-                                <el-dropdown size="medium" split-button  style="margin-left:6px;">
-                                    操作
+                                <el-dropdown style="margin-left:6px;">
+                                    <span class="el-dropdown-link" style="cursor:pointer;font-size:14px;">
+                                        <el-button type="primary" size="mini" plain>选项</el-button>
+                                    </span>
                                     <el-dropdown-menu slot="dropdown">
                                         <el-dropdown-item v-if="permissions.role_row_delEmptyMenu" @click.native="rowEmptyMenu(scope.row)">清空菜单</el-dropdown-item>
                                         <el-dropdown-item v-if="permissions.role_row_getRoleMenu" @click.native="rowRoleMenu(scope.row)">角色菜单</el-dropdown-item>
@@ -88,7 +90,7 @@
                 formData : {
                     kid : '',
                     role_name : '',
-                    role_flag : '',
+                    role_flag : ''
                 },
                 searchForm : {
                     name : ''
