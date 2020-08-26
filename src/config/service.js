@@ -6,19 +6,19 @@ const instance = axios.create({
 var refreshFlag = true;
 //请求拦截器,好使!!!但需要后端要支持才行
 instance.interceptors.request.use(function(config){
-    var access = sessionStorage.getItem('accessToken');
-    var refresh = sessionStorage.getItem('refreshToken');
+    const access = sessionStorage.getItem('accessToken');
+    const refresh = sessionStorage.getItem('refreshToken');
     if(access != null && access.length > 0){
         if(refresh != null && refresh.length > 0){
             config.headers.accessToken = access;
             config.headers['refreshToken'] = refresh;
         }
     }
-    var formData = new FormData();
-    var params = config.data;
-    for(var key in params){
-        var k = key.trim();
-        var v = params[key].trim();
+    const formData = new FormData();
+    const params = config.data;
+    for(const key in params){
+        const k = key.trim();
+        const v = params[key].trim();
         if(k != null && k.length > 0){
             if(v != null && v.length > 0){
                 formData.append(k,v);
@@ -33,7 +33,7 @@ instance.interceptors.request.use(function(config){
 
 //响应拦截器,在实际应用中可以,好使!!!
 instance.interceptors.response.use((data) =>{
-    var _data = data.data;
+    const _data = data.data;
     if(_data.code === 200){
         var renewal = _data.renewal;//注意该更新token标识
         if(renewal){
