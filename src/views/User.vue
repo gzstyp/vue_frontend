@@ -18,21 +18,20 @@
 
 <script>
     export default {
-        name: "User",
-        data(){
-            return {
-                listDaa : [
-                    {
+      name: "User",
+      data(){
+        return {
+          listDaa : [
+            {
 
-                    }
-                ]
             }
-        },
-        created() {
-        },
-        methods : {
-
+          ]
         }
+      },
+      created() {
+      },
+      methods : {
+      }
     }
 </script>
 
