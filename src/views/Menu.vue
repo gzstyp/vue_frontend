@@ -8,13 +8,12 @@
           添加
         </el-button>
       </div>
-      <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
+      <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" @tab-click="tabClick">
         <el-tab-pane
           v-for="(item, index) in editableTabs"
           :key="item.name"
           :label="item.title"
-          :name="item.name"
-        >
+          :name="item.name">
           {{item.content}}
         </el-tab-pane>
       </el-tabs>
@@ -31,15 +30,18 @@
             {
               title: '选项1',
               name: '1',
-              content: '内容1'
             },
             {
               title: '选项2',
               name: '2',
               content: '内容2'
+            },
+            {
+              title: '选项3',
+              name: '3',
             }
           ],
-          tabIndex: 2
+          tabIndex : 3
         }
       },
       methods: {
@@ -53,6 +55,7 @@
           this.editableTabsValue = newTabName;
         },
         removeTab(targetName) {
+          console.info('关闭');
           let tabs = this.editableTabs;
           let activeName = this.editableTabsValue;
           if (activeName === targetName) {
@@ -67,7 +70,11 @@
           }
           this.editableTabsValue = activeName;
           this.editableTabs = tabs.filter(tab => tab.name !== targetName);
-        }
+        },
+        tabClick : function(targetName){
+          console.info(targetName);
+          console.info('点击选中');
+        },
       }
     }
 </script>
