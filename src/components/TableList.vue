@@ -7,10 +7,6 @@
                     <template v-for="item in theads">
                         <el-table-column :prop="item.prop" :label="item.label" :width="item.width" :sortable="item.sortable" show-overflow-tooltip></el-table-column>
                     </template>
-
-                    <!--自定义列显示-->
-                    <slot name="handleColumn"></slot>
-
                     <!-- 操作选项 -->
                     <el-table-column align="center" :width="options('role_row_delEmptyMenu,role_row_getRoleMenu') ? 200 : 130" label="操作选项" v-if="operation('role_row_edit,role_row_delById,role_row_delEmptyMenu,role_row_getRoleMenu')">
                         <template slot-scope="scope">
@@ -26,9 +22,6 @@
                                     </el-dropdown-menu>
                                 </el-dropdown>
                             </template>
-
-                            <!--<slot name="handleOptions"></slot>-->
-
                         </template>
                     </el-table-column>
                 </el-table>
@@ -99,7 +92,7 @@ export default {
         this.tableHeight = winFn.fnGetHeight() - 253;
     },
     methods: {
-        //必填项,点击行的索引列
+        //必填项,点击行的索引列,触发事件
         clickIndex(index){
             this.$emit('clickItemIndex',index);
         },

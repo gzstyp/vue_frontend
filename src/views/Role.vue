@@ -24,7 +24,7 @@
                     @eventChangeCurrent="currentChange"
                     :record="page.total"
                     @delClick="selectionChange"
-                    @clickItemIndex="clickItemIndex"
+                    @clickItemIndex="monitorIndex"
                     >
                     <template v-slot:handleOptions>
                         <el-dropdown-item v-if="permissions.role_row_delEmptyMenu" @click.native="rowEmptyMenu">清空菜单</el-dropdown-item>
@@ -100,7 +100,7 @@
                 opts : false,/*下拉操作是否已执行标识*/
                 opn : true,/*操作选项*/
                 operate : false,/*操作选项是否已执行标识*/
-                clickIndex : 0 //点击行的索引列
+                clickIndex : 0 //点击行的索引列,必填项
             }
         },
         created() {
@@ -176,6 +176,7 @@
             },
             rowEmptyMenu : function(){
                 var data = $('button.rowDataOpts');
+
                 for(var x = 0; x < data.length; x++){
                     //console.info(x);//0-17
                     //console.info(data[x].id);//
@@ -202,7 +203,8 @@
                 const row = JSON.parse(data[this.clickIndex].value);
                 alert(row.kid);
             },
-            clickItemIndex : function(index){
+            //监听事件,点击行的索引列,必填项
+            monitorIndex : function(index){
                 this.clickIndex = index;
             },
             resultHandle : function(data){
