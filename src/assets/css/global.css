@@ -50,7 +50,7 @@ li.el-submenu .el-menu-item{
 }
 /*表格内的样式(表头)  padding: 6px 0; 较为好看*/
 div table thead tr th{
-    padding:6px 0 !important;
+    padding:2px 0 !important;
     height:38px !important;/*数据表格的行的高度*/
 }
 .el-table td, .el-table th{
