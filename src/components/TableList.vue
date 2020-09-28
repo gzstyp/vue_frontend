@@ -14,10 +14,20 @@
                     <!-- 操作选项 -->
                     <el-table-column align="center" :width="options('role_row_delEmptyMenu,role_row_getRoleMenu') ? 200 : 130" label="操作选项" v-if="operation('role_row_edit,role_row_delById,role_row_delEmptyMenu,role_row_getRoleMenu')">
                         <template slot-scope="scope">
-                            <el-button type="primary" size="mini" plain @click="rowEdit(scope.row,scope.$index)" v-if="permissions.role_row_edit">编辑</el-button>
+                            <el-button size="mini" type="primary" plain @click="rowEdit(scope.row,scope.$index)" v-if="permissions.role_row_edit">编辑</el-button>
                             <el-button type="danger" size="mini" plain @click="rowDelete(scope.row,scope.$index)" v-if="permissions.role_row_delById">删除</el-button>
+                            <template v-if="options('role_row_delEmptyMenu,role_row_getRoleMenu')">
+                                <el-dropdown style="margin-left:6px;" trigger="click" @command="clickIndex(scope.$index)">
+                                    <span class="el-dropdown-link" style="cursor:pointer;font-size:14px;">
+                                        <el-button size="mini" plain class="rowDataOpts" :id="scope.row.kid" :value="JSON.stringify(scope.row)">选项</el-button>
+                                    </span>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <slot name="handleOptions"></slot>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
+                            </template>
 
-                            <slot name="handleOptions"></slot>
+                            <!--<slot name="handleOptions"></slot>-->
 
                         </template>
                     </el-table-column>
@@ -89,6 +99,10 @@ export default {
         this.tableHeight = winFn.fnGetHeight() - 253;
     },
     methods: {
+        //必填项,点击行的索引列
+        clickIndex(index){
+            this.$emit('clickItemIndex',index);
+        },
         //每页大小
         eventSize(size){
             this.page.current = 1;
@@ -166,6 +180,15 @@ export default {
             }
             return this.opts;
         }
+    },
+    mounted(){
+        $(window).resize(function (){                    //当浏览器大小变化时
+            //alert($(window).height());                 //浏览器时下窗口可视区域高度
+            //alert($(document).height());               //浏览器时下窗口文档的高度
+            //alert($(document.body).height());          //浏览器时下窗口文档body的高度 979
+            //alert($(document.body).outerHeight(true)); //浏览器时下窗口文档body的总高度 包括border padding margin 979
+            this.tableHeight = winFn.fnGetHeight() - 253;
+        });
     }
 }
 </script>

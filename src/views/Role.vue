@@ -24,19 +24,11 @@
                     @eventChangeCurrent="currentChange"
                     :record="page.total"
                     @delClick="selectionChange"
+                    @clickItemIndex="clickItemIndex"
                     >
                     <template v-slot:handleOptions>
-                        <template v-if="options('role_row_delEmptyMenu,role_row_getRoleMenu')">
-                            <el-dropdown style="margin-left:6px;">
-                                    <span class="el-dropdown-link" style="cursor:pointer;font-size:14px;">
-                                        <el-button type="primary" size="mini" plain>选项</el-button>
-                                    </span>
-                                <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item v-if="permissions.role_row_delEmptyMenu" @click.native="rowEmptyMenu(2)">清空菜单</el-dropdown-item>
-                                    <el-dropdown-item v-if="permissions.role_row_getRoleMenu" @click.native="rowRoleMenu(1024)">角色菜单</el-dropdown-item>
-                                </el-dropdown-menu>
-                            </el-dropdown>
-                        </template>
+                        <el-dropdown-item v-if="permissions.role_row_delEmptyMenu" @click.native="rowEmptyMenu">清空菜单</el-dropdown-item>
+                        <el-dropdown-item v-if="permissions.role_row_getRoleMenu" @click.native="rowRoleMenu">角色菜单</el-dropdown-item>
                     </template>
 
                 </TableList>
@@ -85,7 +77,8 @@
                     {prop : 'role_name',label : '角色名称',width : '',sortable:true},
                     {prop : 'role_flag',label : '角色标识',width : '',sortable:true},
                     {prop : 'utotal',label : '分配量',width : '',sortable:false},
-                    {prop : 'mtotal',label : '菜单数',width : '',sortable:true}
+                    {prop : 'mtotal',label : '菜单数',width : '',sortable:true},
+                    {prop : 'sex',label : '性别',width : '',sortable:false}
                 ],
                 page: {
                     current: 1,
@@ -106,14 +99,15 @@
                 ops : true,/*下拉操作*/
                 opts : false,/*下拉操作是否已执行标识*/
                 opn : true,/*操作选项*/
-                operate : false/*操作选项是否已执行标识*/
+                operate : false,/*操作选项是否已执行标识*/
+                clickIndex : 0 //点击行的索引列
             }
         },
         created() {
             this.getListData();
         },
         methods : {
-            //// 行选择触发事件
+            // 行选择触发事件
             selectionChange(kidData){
                 this.kids = kidData;
             },
@@ -180,7 +174,20 @@
                     });
                 });
             },
-            rowEmptyMenu : function(row){
+            rowEmptyMenu : function(){
+                var data = $('button.rowDataOpts');
+                for(var x = 0; x < data.length; x++){
+                    //console.info(x);//0-17
+                    //console.info(data[x].id);//
+                    //console.info(data[x].value);//
+                }
+
+                const kid = data[this.clickIndex].id;
+                const row = JSON.parse(data[this.clickIndex].value);
+                console.info(kid);
+                console.info(row);
+                console.info(row.mtotal);
+
                 var total = row.mtotal;
                 if(total == null){
                     layerFn.alert('['+row.role_name+']还没有分配菜单',AppKey.code.code199);
@@ -190,8 +197,13 @@
 
                 });
             },
-            rowRoleMenu : function(row){
-                console.info('rowRoleMenu'+row.kid);
+            rowRoleMenu : function(){
+                var data = $('button.rowDataOpts');
+                const row = JSON.parse(data[this.clickIndex].value);
+                alert(row.kid);
+            },
+            clickItemIndex : function(index){
+                this.clickIndex = index;
             },
             resultHandle : function(data){
                 if(data.code === 200){
@@ -253,7 +265,7 @@
                     layerFn.closeIndex(self.layerIndex);
                     if(data.code === 200){
                         data.data.map(item =>{
-                            item.utotal = item.utotal === 1 ? item.utotal+'已处理' : '数据已转换处理,比如1男2女';//如果这个字段 utotal 在编辑时用到,请换另取一个字段,如 item.sexText
+                            item.sex = item.sex === 1 ? item.sex+'已处理' : '数据已转换处理,比如1男2女';//如果这个字段 mtotal 在编辑时用到,请换另取一个字段,如 item.sexText
                             return item;
                         });
                         _this.listDatas = data.data;
