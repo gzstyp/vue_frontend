@@ -8,54 +8,38 @@
                     </el-input>
                 </el-col>
                 <el-col :span="6">
-                    <el-button type="primary" @click="handleEdit()" icon="el-icon-plus" v-if="permissions.role_btn_add">添加</el-button>
+                    <el-button type="primary" @click="rowEdit()" icon="el-icon-plus" v-if="permissions.role_btn_add">添加</el-button>
                     <el-button :disabled="kids.length <= 0" type="danger" @click="delByKeys()" icon="el-icon-delete" v-if="permissions.role_btn_delByKeys">删除</el-button>
                 </el-col>
             </el-row>
             <el-row>
-                <el-table :data="listDatas" :empty-text="listEmpty" @selection-change="selectionChange" @row-dblclick="dblclick" border stripe style="margin-top:6px;">
-                    <el-table-column type="selection" align="center" width="35"></el-table-column>
-                    <el-table-column prop="role_name" label="角色名称"></el-table-column>
-                    <el-table-column prop="role_flag" label="角色标识"></el-table-column>
-                    <el-table-column label="分配量" width="114">
-                        <template slot-scope="scope">
-                            {{(scope.row.utotal) ? scope.row.utotal : '0'}}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="菜单数" width="114">
-                        <template slot-scope="scope">
-                            {{(scope.row.mtotal) ? scope.row.mtotal : '0'}}
-                        </template>
-                    </el-table-column>
-                    <el-table-column :width="options('role_row_delEmptyMenu,role_row_getRoleMenu') ? 200 : 130" label="操作选项" v-if="operation('role_row_edit,role_row_delById,role_row_delEmptyMenu,role_row_getRoleMenu')">
-                        <template slot-scope="scope">
-                            <el-button size="mini" type="primary" @click="handleEdit(scope.$index,scope.row)" v-if="permissions.role_row_edit">编辑</el-button>
-                            <el-button size="mini" type="danger" @click="rowDelete(scope.$index,scope.row)" v-if="permissions.role_row_delById">删除</el-button>
-                            <template v-if="options('role_row_delEmptyMenu,role_row_getRoleMenu')">
-                                <el-dropdown style="margin-left:6px;">
+                <TableList
+                  ref="tableData"
+                    :listDatas="listDatas"
+                    :theads="theads"
+                    :dblclick="dblclick"
+                    @rowEdit="rowEdit"
+                    @rowDelete="rowDelete"
+                    @eventChangeSize="sizeChange"
+                    @eventChangeCurrent="currentChange"
+                    :record="page.total"
+                    @delClick="selectionChange"
+                    >
+                    <template v-slot:handleOptions>
+                        <template v-if="options('role_row_delEmptyMenu,role_row_getRoleMenu')">
+                            <el-dropdown style="margin-left:6px;">
                                     <span class="el-dropdown-link" style="cursor:pointer;font-size:14px;">
                                         <el-button type="primary" size="mini" plain>选项</el-button>
                                     </span>
-                                    <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item v-if="permissions.role_row_delEmptyMenu" @click.native="rowEmptyMenu(scope.row)">清空菜单</el-dropdown-item>
-                                        <el-dropdown-item v-if="permissions.role_row_getRoleMenu" @click.native="rowRoleMenu(scope.row)">角色菜单</el-dropdown-item>
-                                    </el-dropdown-menu>
-                                </el-dropdown>
-                            </template>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item v-if="permissions.role_row_delEmptyMenu" @click.native="rowEmptyMenu(2)">清空菜单</el-dropdown-item>
+                                    <el-dropdown-item v-if="permissions.role_row_getRoleMenu" @click.native="rowRoleMenu(1024)">角色菜单</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
                         </template>
-                    </el-table-column>
-                </el-table>
-                <el-pagination
-                    v-if="page.size<page.total"
-                    background
-                    layout="total,sizes,prev,pager,next,jumper"
-                    @size-change="changeSize"
-                    @current-change="currentChange"
-                    :page-size="page.size"
-                    :page-sizes="page.sizes"
-                    :current-page="page.current"
-                    :total="page.total">
-                </el-pagination>
+                    </template>
+
+                </TableList>
             </el-row>
             <el-dialog :title="dialogTitle" :lock-scroll="false" :visible.sync="dialogVisible" width="32%" :before-close="handleClose" :close-on-click-modal="false" :append-to-body="true">
                 <el-form ref="form" label-width="20%">
@@ -79,8 +63,10 @@
 </template>
 
 <script>
+    import TableList from "../components/TableList";
     export default {
         name: "Role",
+        components: {TableList},
         data : function(){
             return {
                 listEmpty:'暂无数据',
@@ -95,10 +81,15 @@
                 },
                 kids: [],
                 listDatas : [],
+                theads : [
+                    {prop : 'role_name',label : '角色名称',width : '',sortable:true},
+                    {prop : 'role_flag',label : '角色标识',width : '',sortable:true},
+                    {prop : 'utotal',label : '分配量',width : '',sortable:false},
+                    {prop : 'mtotal',label : '菜单数',width : '',sortable:true}
+                ],
                 page: {
                     current: 1,
-                    size: 20,
-                    sizes: [20,50,99],
+                    size: this.pageLimit,
                     total: 0
                 },
                 dialogVisible : false,
@@ -122,12 +113,9 @@
             this.getListData();
         },
         methods : {
-            // 行选择触发事件
-            selectionChange(selection) {
-                this.kids = [];
-                selection.forEach(element => {
-                    this.kids.push(element.kid);
-                });
+            //// 行选择触发事件
+            selectionChange(kidData){
+                this.kids = kidData;
             },
             dblclick : function(row,column,event){
                 this.openDialog(row);
@@ -162,16 +150,18 @@
                 }
                 return true;
             },
-            handleEdit : function(index,item){
-                if(item != null && item.kid != null){
+            rowEdit : function(rowData){
+                if(rowData != null){
+                    const {row,index} = rowData;
                     this.dialogTitle = '编辑角色';
-                    this.openDialog(item);
+                    this.openDialog(row);
                 }else{
                     this.dialogTitle = '添加角色';
                     this.openDialog(null);
                 }
             },
-            rowDelete : function(index,row){
+            rowDelete : function(rowData){
+                const {row,index} = rowData;
                 var _this = this;
                 this.$confirm('系统提示',{
                     distinguishCancelAndClose: true,
@@ -254,6 +244,7 @@
                     current : _this.page.current,
                     pageSize : _this.page.size
                 };
+                console.log(params);
                 if(_this.searchForm.name){
                     params.role_name = _this.searchForm.name;
                 }
@@ -261,6 +252,10 @@
                 this.httpReq.get(this.apis.role.listData,params,(data)=>{
                     layerFn.closeIndex(self.layerIndex);
                     if(data.code === 200){
+                        data.data.map(item =>{
+                            item.utotal = item.utotal === 1 ? item.utotal+'已处理' : '数据已转换处理,比如1男2女';//如果这个字段 utotal 在编辑时用到,请换另取一个字段,如 item.sexText
+                            return item;
+                        });
                         _this.listDatas = data.data;
                         _this.page.total = data.total;
                         _this.controlShow(data.permissions)
@@ -326,7 +321,7 @@
                 }
                 return this.opts;
             },
-            changeSize : function (pageSize){
+            sizeChange : function (pageSize){
                 this.page.current = 1;
                 this.page.size = pageSize;
                 this.getListData();
@@ -339,5 +334,5 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 </style>

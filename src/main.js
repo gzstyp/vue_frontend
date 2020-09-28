@@ -18,6 +18,8 @@ Vue.config.productionTip = false;
 
 Vue.prototype.apis = apis;
 Vue.prototype.httpReq = httpReq;
+//默认每页大小
+Vue.prototype.pageLimit = 18;
 
 Vue.use(ElementUI);
 
