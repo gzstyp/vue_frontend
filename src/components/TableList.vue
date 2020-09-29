@@ -49,9 +49,6 @@ export default {
                 return null
             }
         },
-        total: {
-            default: 0
-        },
         dblclick: {
             type: Function
         },
@@ -62,7 +59,8 @@ export default {
     },
     data: function(){
         return {
-            listEmpty: '暂无数据', kids: [],
+            listEmpty: '暂无数据',
+            kids: [],//保存复选框已勾选的id
             page : {
                 current : this.currentIndex,
                 total : this.record,
@@ -117,8 +115,8 @@ export default {
         // 行选择触发事件
         selectionChange(selection){
             this.kids = [];
-            selection.forEach(element => {
-                this.kids.push(element.kid);
+            selection.forEach(item => {
+                this.kids.push(item.kid);
             });
             this.$emit('delClick',this.kids);
         },

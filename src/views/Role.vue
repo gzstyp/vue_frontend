@@ -63,7 +63,7 @@
                 kids: [],//批量删除，用于监听接收子组件列表的复选框勾选的列,必填项
                 clickIndex : 0, //用于监听点击行的索引列,必填项
                 listDatas : [],
-                theads : [
+                theads : [ //需要显示的列
                     {prop : 'role_name',label : '角色名称',width : '',sortable:true},
                     {prop : 'role_flag',label : '角色标识',width : '',sortable:true},
                     {prop : 'utotal',label : '分配量',width : '',sortable:false},
