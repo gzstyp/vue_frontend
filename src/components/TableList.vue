@@ -85,18 +85,18 @@ export default {
             opts: false, //操作选项
             opn: true, //操作选项是否已执行标识
             operate: false,
-            tableHeight : 760
+            tableHeight : 760//默认的高度
         }
     },
     created(){
         this.tableHeight = winFn.fnGetHeight() - 253;
     },
     methods: {
-        //必填项,点击行的索引列,触发事件
+        //必填项,点击行的索引列,触发事件,此时需要在父组件[调用方]添加一个接收事件名‘clickItemIndex’即可达到子组件向父组件数据
         clickIndex(index){
             this.$emit('clickItemIndex',index);
         },
-        //每页大小
+        //每页大小,更改每页大小时跳转到第1页
         eventSize(size){
             this.page.current = 1;
             this.$emit('eventChangeSize',size);

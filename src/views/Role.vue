@@ -30,7 +30,6 @@
                         <el-dropdown-item v-if="permissions.role_row_delEmptyMenu" @click.native="rowEmptyMenu">清空菜单</el-dropdown-item>
                         <el-dropdown-item v-if="permissions.role_row_getRoleMenu" @click.native="rowRoleMenu">角色菜单</el-dropdown-item>
                     </template>
-
                 </TableList>
             </el-row>
             <el-dialog :title="dialogTitle" :lock-scroll="false" :visible.sync="dialogVisible" width="32%" :before-close="handleClose" :close-on-click-modal="false" :append-to-body="true">
@@ -61,17 +60,8 @@
         components: {TableList},
         data : function(){
             return {
-                listEmpty:'暂无数据',
-                dialogTitle :'添加|编辑',
-                formData : {
-                    kid : '',
-                    role_name : '',
-                    role_flag : ''
-                },
-                searchForm : {
-                    name : ''
-                },
-                kids: [],
+                kids: [],//批量删除，用于监听接收子组件列表的复选框勾选的列,必填项
+                clickIndex : 0, //用于监听点击行的索引列,必填项
                 listDatas : [],
                 theads : [
                     {prop : 'role_name',label : '角色名称',width : '',sortable:true},
@@ -84,6 +74,16 @@
                     current: 1,
                     size: this.pageLimit,
                     total: 0
+                },
+                listEmpty:'暂无数据',
+                dialogTitle :'添加|编辑',
+                formData : {
+                    kid : '',
+                    role_name : '',
+                    role_flag : ''
+                },
+                searchForm : {
+                    name : ''
                 },
                 dialogVisible : false,
                 permissions : {
@@ -99,8 +99,7 @@
                 ops : true,/*下拉操作*/
                 opts : false,/*下拉操作是否已执行标识*/
                 opn : true,/*操作选项*/
-                operate : false,/*操作选项是否已执行标识*/
-                clickIndex : 0 //点击行的索引列,必填项
+                operate : false/*操作选项是否已执行标识*/
             }
         },
         created() {
