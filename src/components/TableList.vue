@@ -97,6 +97,7 @@ export default {
         //每页大小,更改每页大小时跳转到第1页
         eventSize(size){
             this.page.current = 1;
+            //事件获取之后,要发送事件到调用页面,通过父组件(调用页面)自定义事件实时发送事件;
             this.$emit('eventChangeSize',size);
         },
         //当前页
