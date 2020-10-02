@@ -14,10 +14,11 @@
     import {mapState,mapMutations} from 'vuex';
     export default {
         name : "Tab",
+        // 计算属性,它实时接收状态的变化,实时监听模块化 /store/tab.js 的标识state下里定义的 tabsList 值
         computed : {
             //括号内的参数可以是数组或对象,此处是对象,前面的tags是属性名,好比在 data 定义一个属性名为 tags 一个道理，只是用了一个属性的辅助 mapState 替换了在 data 写的属性名而已
             ...mapState({
-                tags : state => state.tab.tabsList //tab是模块化的名称
+                tags : state => state.tab.tabsList //tab是模块化的名称,也就是 src/store/tab.js下的state的tabsList,tags有url和name
             })//...表示让计算的属性合并
         },
         data(){
