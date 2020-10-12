@@ -16,14 +16,8 @@ instance.interceptors.request.use(function(config){
     }
     const formData = new FormData();
     const params = config.data;
-    for(const key in params){
-        const k = key.trim();
-        const v = params[key].trim();
-        if(k != null && k.length > 0){
-            if(v != null && v.length > 0){
-                formData.append(k,v);
-            }
-        }
+    for(let key in params){
+        formData.append(key.trim(),params[key]);
     }
     config.data = formData;
     return config;
