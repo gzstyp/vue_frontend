@@ -17,6 +17,7 @@
                   ref="tableData"
                     :listDatas="listDatas"
                     :theads="theads"
+                    :empty-text="listEmpty"
                     :dblclick="dblclick"
                     @rowEdit="rowEdit"
                     @rowDelete="rowDelete"
@@ -334,7 +335,7 @@
                 }
                 return this.opts;
             },
-            //是实时接收的,接收子组件发送来的事件,名为 loadMore,应该是实时监听且实时接收执行的 
+            //是实时接收的,接收子组件发送来的事件,名为 loadMore,应该是实时监听且实时接收执行的
             sizeChange : function (pageSize){
                 this.page.current = 1;
                 this.page.size = pageSize;
