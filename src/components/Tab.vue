@@ -15,6 +15,7 @@
     export default {
         name : "Tab",
         // 计算属性,它实时接收状态的变化,实时监听模块化 /store/tab.js 的标识state下里定义的 tabsList 值
+        //计算属性,它实时监听vuex的状态mapState的变化,即实时监听 /store/index.js 的标识state下里定义的 historyLists 值;watch是监听 data() 或 props的值的变化而执行响应的事件或更改值
         computed : {
             //括号内的参数可以是数组或对象,此处是对象,前面的tags是属性名,好比在 data 定义一个属性名为 tags 一个道理，只是用了一个属性的辅助 mapState 替换了在 data 写的属性名而已
             ...mapState({
