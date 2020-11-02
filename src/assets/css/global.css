@@ -9,7 +9,7 @@ html,body,#app{
     padding: 2px;
 }
 div.el-submenu__title{
-    padding:0 !important;
+    padding:0 0 0 6px !important;
     height:42px;
     line-height:42px;
 }
