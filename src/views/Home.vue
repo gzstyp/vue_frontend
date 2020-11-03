@@ -3,7 +3,7 @@
         <el-header>
             <div>
                 <img src="../assets/logo.jpg" alt="logo">
-                <label>噪音数据分析管理系统</label>
+                <label>噪音治理服务</label>
                 <i @click="showHide()" style="font-size: 24px;cursor: pointer;" title="隐藏|显示导航" :class="aside ? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i>
             </div>
             <div>
