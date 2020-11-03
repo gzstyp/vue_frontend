@@ -25,7 +25,7 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                <PageBar style="margin-top:6px;" :page="page" @childrenSize="eventSize" @childrenCurrent="eventCurrent"></PageBar>
+                <PageBar style="margin-top:14px;" :recordTotal="recordTotal" :page="page" @childrenSize="eventSize" @childrenCurrent="eventCurrent"></PageBar>
             </el-row>
         </div>
     </div>
@@ -52,7 +52,7 @@ export default {
         dblclick: {
             type: Function
         },
-        record : {
+        recordTotal : {
             type : Number,
             default(){}
         }
@@ -63,7 +63,7 @@ export default {
             kids: [],//保存复选框已勾选的id
             page : {
                 current : this.currentIndex,
-                total : this.record,
+                total : this.recordTotal,
                 size : this.pageLimit,
                 sizes : [this.pageLimit,20,50,99]
             },
@@ -87,7 +87,7 @@ export default {
         }
     },
     created(){
-        this.tableHeight = winFn.fnGetHeight() - 253;
+        this.tableHeight = winFn.fnGetHeight() - 236;
     },
     methods: {
         //必填项,点击行的索引列,触发事件,此时需要在父组件[调用方]添加一个接收事件名‘clickItemIndex’即可达到子组件向父组件数据

@@ -8,7 +8,7 @@
         :page-size="page.size"
         :page-sizes="page.sizes"
         :current-page="page.current"
-        :total="page.total">
+        :total="recordTotal">
     </el-pagination>
 </template>
 <script>
@@ -19,6 +19,12 @@
                 type : Object,
                 default(){
                     return {}
+                }
+            },
+            recordTotal : {
+                type : Number,
+                default(){
+                    return 0;
                 }
             }
         },

@@ -23,7 +23,7 @@
                     @rowDelete="rowDelete"
                     @eventChangeSize="sizeChange"
                     @eventChangeCurrent="currentChange"
-                    :record="page.total"
+                    :recordTotal="page.total"
                     @delClick="selectionChange"
                     @clickItemIndex="monitorIndex"
                     >
@@ -59,7 +59,7 @@
     export default {
         name: "Role",
         components: {TableList},
-        data : function(){
+        data(){
             return {
                 kids: [],//批量删除，用于监听接收子组件列表的复选框勾选的列,必填项
                 clickIndex : 0, //用于监听点击行的索引列,必填项
@@ -258,7 +258,6 @@
                     current : _this.page.current,
                     pageSize : _this.page.size
                 };
-                console.log(params);
                 if(_this.searchForm.name){
                     params.role_name = _this.searchForm.name;
                 }
