@@ -17,7 +17,8 @@ const routes = [
         {path:'/menu',component:() => import('../views/Menu')},
         {path:'/persion',component:() => import('../views/Persion')}
     ]},
-    {path:'*',component: NotFound}
+    //{path:'*',component: NotFound},//ok的
+    {path:'/:catchAll(.*)',component: NotFound}
 ]
 
 const router = new VueRouter({
