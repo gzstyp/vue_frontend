@@ -34,7 +34,7 @@ export default {
         login : function (){
             var _username = this.loginForm.username || '';// 注意 --> _username.length === 0
             var _password = this.loginForm.password; // 注意 --> _password == null
-            if(_username.length === 0 || (typeof(_username)=='string' && _username.replace(/^\s+|\s+$/gm,'').length <=0)){//验证完美
+            /*if(_username.length === 0 || (typeof(_username)=='string' && _username.replace(/^\s+|\s+$/gm,'').length <=0)){//验证完美
                 this.$message.error('请输入登录账号!');
                 return;
             }
@@ -42,7 +42,9 @@ export default {
             if(_password == null || _password.length === 0 || (typeof(_password)=='string' && _password.replace(/^\s+|\s+$/gm,'').length <=0)){
                 this.$message.error('请输入登录密码!');
                 return;
-            }
+            }*/
+            if(this.checkParam(_username,'请输入登录账号!'))return;
+            if(this.checkParam(_password,'请输入登录密码!'))return;
             self.layerIndex = layerFn.loading('登录认证……');
             this.httpReq.post(this.apis.user.login,this.loginForm,(data) =>{
                 layerFn.closeIndex(self.layerIndex);
@@ -61,6 +63,7 @@ export default {
                 this.$message.error('连接服务器失败');
             });
         },
+        //ES6
         resetData(){
             this.loginForm.username = null;
             this.loginForm.password = null;// 注意,置空时,判断要做 _password.length == null

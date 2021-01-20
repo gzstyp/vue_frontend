@@ -18,6 +18,16 @@ Vue.config.productionTip = false;
 
 Vue.prototype.apis = apis;
 Vue.prototype.httpReq = httpReq;
+
+//验证是否已输入参数: if(this.checkParam(_username,'请输入登录账号!'))return;
+Vue.prototype.checkParam = function(value,msg){
+    if(value == null || value.length === 0 || (typeof(value) == 'string' && value.replace(/^\s+|\s+$/gm,'').length <= 0)){
+        this.$message.error(msg);//layerFn.alert(msg);也是ok的
+        return true;
+    }
+    return false;
+};
+
 //默认每页大小
 Vue.prototype.pageLimit = 18;
 
