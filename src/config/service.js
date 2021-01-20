@@ -17,7 +17,13 @@ instance.interceptors.request.use(function(config){
     const formData = new FormData();
     const params = config.data;
     for(let key in params){
-        formData.append(key.trim(),params[key]);
+        if (params[key] != null){
+            if(typeof(params[key])=='string'){
+                formData.append(key.trim(),params[key].trim());
+            }else{
+                formData.append(key.trim(),params[key]);
+            }
+        }
     }
     config.data = formData;
     return config;

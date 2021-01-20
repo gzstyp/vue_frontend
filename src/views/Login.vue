@@ -26,7 +26,7 @@ export default {
 		return{
 			loginForm : {
                 username : 'admin',
-				password : '1'
+				password : 1
 			}
 		}
 	},
@@ -34,11 +34,11 @@ export default {
         login : function (){
             var _username = this.loginForm.username;
             var _password = this.loginForm.password;
-            if(_username == null || _username.trim().length <=0){
+            if(_username.length === 0 || (typeof(_username)=='string' && _username.replace(/^\s+|\s+$/gm,'').length <=0)){//验证完美
                 this.$message.error('请输入登录账号!');
                 return;
             }
-            if(_password == null || _password.trim().length <=0){
+            if(_password.length === 0 || (typeof(_password)=='string' && _password.replace(/^\s+|\s+$/gm,'').length <=0)){
                 this.$message.error('请输入登录密码!');
                 return;
             }
