@@ -32,13 +32,14 @@ export default {
 	},
     methods : {
         login : function (){
-            var _username = this.loginForm.username;
-            var _password = this.loginForm.password;
+            var _username = this.loginForm.username || '';// 注意 --> _username.length === 0
+            var _password = this.loginForm.password; // 注意 --> _password == null
             if(_username.length === 0 || (typeof(_username)=='string' && _username.replace(/^\s+|\s+$/gm,'').length <=0)){//验证完美
                 this.$message.error('请输入登录账号!');
                 return;
             }
-            if(_password.length === 0 || (typeof(_password)=='string' && _password.replace(/^\s+|\s+$/gm,'').length <=0)){
+            // 注意 _password == null
+            if(_password == null || _password.length === 0 || (typeof(_password)=='string' && _password.replace(/^\s+|\s+$/gm,'').length <=0)){
                 this.$message.error('请输入登录密码!');
                 return;
             }
@@ -61,8 +62,8 @@ export default {
             });
         },
         resetData(){
-            this.loginForm.username = '';
-            this.loginForm.password = '';
+            this.loginForm.username = null;
+            this.loginForm.password = null;// 注意,置空时,判断要做 _password.length == null
         }
     }
 }
