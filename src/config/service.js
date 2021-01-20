@@ -1,7 +1,8 @@
 import axios from "axios";
 //创建axios实例,本实例不包含表单里有文件上传功能
 const instance = axios.create({
-    timeout : 40000
+    timeout : 40000,
+    timeoutErrorMessage : '连接服务器超时'
 });
 var refreshFlag = true;
 //请求拦截器,好使!!!但需要后端要支持才行
