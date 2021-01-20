@@ -5,7 +5,7 @@ const instance = axios.create({
     timeoutErrorMessage : '连接服务器超时'
 });
 var refreshFlag = true;
-//请求拦截器,好使!!!但需要后端要支持才行
+//请求拦截器,好使!!!但需要后端要支持才行,上传的不走这方法,直接用elements自带的上传方法
 instance.interceptors.request.use(function(config){
     const access = sessionStorage.getItem('accessToken');
     const refresh = sessionStorage.getItem('refreshToken');
